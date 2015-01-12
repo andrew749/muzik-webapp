@@ -3,7 +3,7 @@ import requests
 from lxml import html
 import pdb
 import json
-from Song import Song
+from Song import *
 from urllib.parse import quote
 app=Flask(__name__)
 downloadsnllink="http://www.downloads.nl/results/mp3/1/";#add string of song to end
@@ -20,12 +20,12 @@ def searchDownloadNL(songName):
     for song in songs:
         s=Song(songName,"www.downloads.nl"+song)
         songArray.append(s)
-    return s
+    return songArray
 @app.route('/search')
 def searchForSongs():
     print("1")
     links=searchDownloadNL("hooked on a feeling")        
-    return (links.songToJson())
+    return (allSongsToJson(links))
 if __name__ == '__main__':
     app.run(debug=True)
 
