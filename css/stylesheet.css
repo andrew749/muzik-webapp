@@ -1,0 +1,23 @@
+body{
+height: 100vh;
+
+}
+
+#searchbutton {
+    background-color: #FFF;
+    width: 5em;
+    font-size: 2em;
+}
+
+#searchbar {
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+    vertical-align: middle;
+}
+
+#searchtext {
+    width: 80%;
+    font-size: 2em;
+    
+}
