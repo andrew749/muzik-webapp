@@ -1,6 +1,5 @@
 from flask import Flask, url_for
 import requests
-from xml.dometree import ElementTree
 from lxml import html
 import pdb
 import json
@@ -22,16 +21,23 @@ def searchDownloadNL(songName):
         s=Song(songName,"www.downloads.nl"+song)
         songArray.append(s)
     return songArray
+def searchYouTube(songName):
+    url=""
+    songArray=[]
+    return songArray
 def searchMP3Skull(songName):
-    url="http://mp3skull.com/mp3/"+ str(quote(songName))
+    url="http://mp3skull.com/mp3/"+ str(songName.replace(' ','_')+".html")
     print(url)
     page=requests.get(url,headers=header)
     tree=html.fromstring(page.text)
-    songs=tree.xpath("//div[@id='song_html']//a/@href")
+    songs=tree.xpath("//div[@id='song_html']")
     songArray=[]
     for song in songs:
-        s=Song(songName,song)
-        s=SongArray.append(s)
+        link=tree.xpath("//div[@id='song_html']//a[text()='Download']/@href")
+        name=tree.xpath("//div[@id='song_html']/div/div/b/text()")
+        print(name)
+        s=Song(name,link)
+        s=songArray.append(s)
     return (songArray)
 @app.route('/search')
 def searchForSongs():
