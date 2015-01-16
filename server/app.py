@@ -30,13 +30,16 @@ def searchMP3Skull(songName):
     print(url)
     page=requests.get(url,headers=header)
     tree=html.fromstring(page.text)
-    songs=tree.xpath("//div[@id='song_html']")
+    songs=tree.xpath("//div[@id='song_html']//a[text()='Download']/@href")
+    names=tree.xpath("//div[@id='song_html']//div/div/b/text()")
+    i=0
     songArray=[]
-    for song in songs:
-        link=tree.xpath("//div[@id='song_html']//a[text()='Download']/@href")
-        name=tree.xpath("//div[@id='song_html']/div/div/b/text()")
-        s=Song(name,link)
+    for x in range(len(songs)):
+        if(i>30):
+            break
+        s=Song(names[x],songs[x])
         s=songArray.append(s)
+        i+=1
     return (songArray)
 @app.route('/')
 def serveGUI():
@@ -44,8 +47,6 @@ def serveGUI():
 @app.route('/search')
 def searchForSongs():
     name = request.args.get('songname')
-    print (request.args.get)
-    print(request.args.get('songname'))
     links=searchDownloadNL(name)
     links+=searchMP3Skull(name)
     return (allSongsToJson(links))

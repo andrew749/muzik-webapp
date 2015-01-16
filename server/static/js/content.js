@@ -16,6 +16,10 @@ $(document).ready(function(){
         getSongs(searchString);
 
     });
+    
+    function handleSearch(){
+    
+    }
     function getSongs(songName){
         console.log(songName);
         $.ajax({
@@ -24,8 +28,16 @@ $(document).ready(function(){
             data:{'songname':songName},
             datatype:'jsonp',
             success: function(data) {
-                console.log(data);
-                $("body").append(data);
+                var row=$("\tr")
+                var amount=30;
+                var j=0;
+                data=JSON.parse(data);
+                for (var x in data){
+                    if(j>amount)break;
+                    j++;
+                    $('#results tr:last').after('<tr><td>'+data[x].title+'</td><td>'+data[x].url+'</td></tr>');            
+                }
+
             }
         });
     }
