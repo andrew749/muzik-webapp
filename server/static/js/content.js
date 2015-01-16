@@ -13,18 +13,19 @@ $(document).ready(function(){
         e.preventDefault();
         var searchString=$("#searchtext").val();
         console.log();
-        getDownloadNl(searchString);
+        getSongs(searchString);
 
     });
-    function getDownloadNl(songName){
-    
+    function getSongs(songName){
+        console.log(songName);
         $.ajax({
-            url:  downloadsnllink+encodeURIComponent(songName),
+            url:  "/search",
             type: 'GET',
+            data:{'songname':songName},
             datatype:'jsonp',
             success: function(data) {
                 console.log(data);
-            $("body").append(data);
+                $("body").append(data);
             }
         });
     }

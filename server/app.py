@@ -1,4 +1,4 @@
-from flask import Flask, url_for
+from flask import Flask, url_for, request, render_template
 import requests
 from lxml import html
 import pdb
@@ -35,15 +35,19 @@ def searchMP3Skull(songName):
     for song in songs:
         link=tree.xpath("//div[@id='song_html']//a[text()='Download']/@href")
         name=tree.xpath("//div[@id='song_html']/div/div/b/text()")
-        print(name)
         s=Song(name,link)
         s=songArray.append(s)
     return (songArray)
+@app.route('/')
+def serveGUI():
+    return render_template('index.html')
 @app.route('/search')
 def searchForSongs():
-    print("1")
-    links=searchDownloadNL("hooked on a feeling")
-    links+=searchMP3Skull("hooked on a feeling")
+    name = request.args.get('songname')
+    print (request.args.get)
+    print(request.args.get('songname'))
+    links=searchDownloadNL(name)
+    links+=searchMP3Skull(name)
     return (allSongsToJson(links))
 if __name__ == '__main__':
     app.run(debug=True)
