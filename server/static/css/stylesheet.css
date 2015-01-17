@@ -1,5 +1,5 @@
 body{
-height: 100vh;
+    height: 100vh;
 
 }
 
@@ -19,5 +19,25 @@ height: 100vh;
 #searchtext {
     width: 80%;
     font-size: 2em;
+
+}
+div{
+font-size: 1.2em;
     
+}
+#content{
+width: 90%;
+    margin: 0 auto;
+
+}
+.element{
+    min-width: 30%;
+    width: 30%;
+    word-wrap: break-word;
+    display: inline-block;
+    min-height:  20vh;
+    height: auto;
+    margin: 20px;
+    background-color: #e0e0e0;
+
 }

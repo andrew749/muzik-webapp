@@ -9,18 +9,18 @@ app=Flask(__name__)
 header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0',}
 downloadsnllink="http://www.downloads.nl/results/mp3/1/";#add string of song to end
 #Seaches the site and returns an array of links
-def searchDownloadNL(songName):
-    print ("started")
-    header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0',}
-    url=downloadsnllink+str(quote(songName))
-    page=requests.get(url, headers=header)
-    tree=html.fromstring(page.text)
-    songs=tree.xpath("//div/a[@onclick]/@href")
-    songArray=[]
-    for song in songs:
-        s=Song(songName,"www.downloads.nl"+song)
-        songArray.append(s)
-    return songArray
+#def searchDownloadNL(songName):
+    #print ("started")
+    #header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0',}
+    #url=downloadsnllink+str(quote(songName))
+    #page=requests.get(url, headers=header)
+    #tree=html.fromstring(page.text)
+    #songs=tree.xpath("")
+    #songArray=[]
+    #for song in songs:
+        #s=Song(songName,"www.downloads.nl"+song)
+        #songArray.append(s)
+    #return songArray
 def searchYouTube(songName):
     url=""
     songArray=[]
@@ -35,7 +35,7 @@ def searchMP3Skull(songName):
     i=0
     songArray=[]
     for x in range(len(songs)):
-        if(i>30):
+        if(i>100):
             break
         s=Song(names[x],songs[x])
         s=songArray.append(s)
@@ -47,7 +47,8 @@ def serveGUI():
 @app.route('/search')
 def searchForSongs():
     name = request.args.get('songname')
-    links=searchDownloadNL(name)
+    links=[]
+    #links=searchDownloadNL(name)
     links+=searchMP3Skull(name)
     return (allSongsToJson(links))
 if __name__ == '__main__':

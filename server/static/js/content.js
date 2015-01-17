@@ -10,15 +10,21 @@ $(document).ready(function(){
 
     });
     $("#searchbutton").click(function(e){
+        handleSearch(e);
+
+    });
+    $('#searchtext').keydown(function(e) {
+        if (e.keyCode == 13) {
+            e.preventDefault();
+            handleSearch(e);
+        }
+    });
+    function handleSearch(e){
         e.preventDefault();
         var searchString=$("#searchtext").val();
         console.log();
         getSongs(searchString);
 
-    });
-    
-    function handleSearch(){
-    
     }
     function getSongs(songName){
         console.log(songName);
@@ -35,7 +41,7 @@ $(document).ready(function(){
                 for (var x in data){
                     if(j>amount)break;
                     j++;
-                    $('#results tr:last').after('<tr><td>'+data[x].title+'</td><td>'+data[x].url+'</td></tr>');            
+                    $('#content').append('<div class="element"><div>'+data[x].title+'</div><div><a href="'+data[x].url+'">'+data[x].url+'</a></div></div>');            
                 }
 
             }
