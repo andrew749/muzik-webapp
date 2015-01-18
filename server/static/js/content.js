@@ -5,6 +5,14 @@ function entry(title, url){
 }
 $(document).ready(function(){
     var downloadsnllink="http://www.downloads.nl/results/mp3/1/";//add string of song to end
+    var $container = $('#content');
+    // initialize
+    $container.masonry({
+        columnWidth: 200,
+        itemSelector: '.item'
+    });
+    var msnry = $container.data('masonry');
+
     $("#searchform").submit(function(e){
         e.preventDefault();
 
@@ -41,7 +49,8 @@ $(document).ready(function(){
                 for (var x in data){
                     if(j>amount)break;
                     j++;
-                    $('#content').append('<div class="element"><div>'+data[x].title+'</div><div><a href="'+data[x].url+'">'+data[x].url+'</a></div></div>');            
+                    var element=$('<div class="col-md-4 outerelement"><div class="element"><div><h2>'+data[x].title+'</h2></div><div><a href="'+data[x].url+'">'+data[x].url+'</a></div></div></div>');
+                    $('#content').append(element).masonry('appended',element,true);            
                 }
 
             }
