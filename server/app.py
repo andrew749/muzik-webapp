@@ -2,7 +2,7 @@ from flask import Flask, url_for, request, render_template
 import requests
 from lxml import html
 import json
-from Song import *
+from server.Song import *
 from urllib.parse import quote
 app=Flask(__name__)
 header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0',}
