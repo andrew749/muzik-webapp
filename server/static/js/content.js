@@ -45,6 +45,7 @@ $(document).ready(function(){
                 var row=$("\tr")
                 var amount=30;
                 var j=0;
+                $("#content").empty();
                 data=JSON.parse(data);
                 for (var x in data){
                     if(j>amount)break;
