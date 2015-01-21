@@ -29,6 +29,7 @@ $(document).ready(function(){
     });
     function handleSearch(e){
         e.preventDefault();
+        $("#content").empty();
         var searchString=$("#searchtext").val();
         console.log();
         getSongs(searchString);
@@ -42,10 +43,8 @@ $(document).ready(function(){
             data:{'songname':songName},
             datatype:'jsonp',
             success: function(data) {
-                var row=$("\tr")
                 var amount=30;
                 var j=0;
-                $("#content").empty();
                 data=JSON.parse(data);
                 for (var x in data){
                     if(j>amount)break;
