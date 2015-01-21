@@ -51,3 +51,14 @@ body{
     min-height: 100%;
     position: relative;
 }
+
+#playerholder {
+    height: 10vh;
+    margin-top: 10vh;
+}
+
+.fixedheader {
+    position: fixed;
+    top: 0;
+    z-index:1000;
+}

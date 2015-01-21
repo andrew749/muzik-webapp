@@ -35,7 +35,7 @@ $(document).ready(function(){
     function playSong(link){
         if(!audioPlayer){
 
-            $("#playerholder").append($("<audio />",{autoPlay:'autoplay',controls:'controls', id:"ap"}));
+            $("#playerholder").append($("<audio />",{autoPlay:'autoplay',controls:'controls', id:"ap", class:"col-md-12"}));
             audioPlayer=1;
 
         }
