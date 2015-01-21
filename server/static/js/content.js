@@ -6,7 +6,7 @@ function entry(title, url){
 $(document).ready(function(){
     var downloadsnllink="http://www.downloads.nl/results/mp3/1/";//add string of song to end
     var $container = $('#content');
-    var playerexists=0;
+    var audioPlayer=0;
     // initialize
     $container.masonry({
         columnWidth: 200,
@@ -29,18 +29,17 @@ $(document).ready(function(){
         }
     });
 
-    function addSource(elem,path){
-        $('<source />').attr('src',path).appendTo(elem);
+    function addSource(path){
+        $("#ap").attr('src',path).trigger("play");
     }
     function playSong(link){
-        if(!playerexists){
-        var player=$("<audio />",{autoPlay:'autoplay',controls:'controls'});
-            playerexists=1;
-        }else{
-        player=$("audio");
+        if(!audioPlayer){
+
+            $("#playerholder").append($("<audio />",{autoPlay:'autoplay',controls:'controls', id:"ap"}));
+            audioPlayer=1;
+
         }
-        addSource(player,link);
-        $("#playerholder").append(player);
+        addSource(link);
         console.log("doneadding");
 
     }
