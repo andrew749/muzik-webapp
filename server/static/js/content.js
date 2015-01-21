@@ -50,7 +50,7 @@ $(document).ready(function(){
                 for (var x in data){
                     if(j>amount)break;
                     j++;
-                    var element=$('<div class="col-md-4 outerelement"><div class="element"><div><h2>'+data[x].title+'</h2></div><div><a href="'+data[x].url+'">'+data[x].url+'</a><audio controls> <source src="'+data[x].url+'"type="audio/mpeg">Your browser does not support the audio element.</audio></div></div></div>');
+                    var element=$('<div class="col-md-3 outerelement"><div class="element"><div><h2>'+data[x].title+'</h2></div><div><a href="'+data[x].url+'">'+data[x].url+'</a><audio controls> <source src="'+data[x].url+'"type="audio/mpeg">Your browser does not support the audio element.</audio></div></div></div>');
                     $('#content').append(element).masonry('appended',element,true);            
                 }
 
