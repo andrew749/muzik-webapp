@@ -60,6 +60,7 @@ body{
 #playerholder {
     height: 10vh;
     margin-top: 10vh;
+    display:block;
 }
 
 .fixedheader {
