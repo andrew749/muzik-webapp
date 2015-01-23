@@ -2,7 +2,7 @@ from flask import Flask, url_for, request, render_template
 import requests
 from lxml import html
 import json
-from server.Song import *
+from Song import *
 from urllib.parse import quote
 app=Flask(__name__)
 header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0',}
@@ -44,24 +44,23 @@ def searchMP3Skull(songName):
 def getTopHits():
     url="https://itunes.apple.com/us/rss/topsongs/limit=100/xml"
     page=requests.get(url,headers=header)
-    tree=html.fromstring(page.text)
+    tree=html.fromstring(page.content)
     names=tree.xpath("//entry//title/text()")
-    art=tree.xpath("//entry//im:image[@height='170']/text()")
+    art=tree.xpath("//entry//*[@height='170']/text()")
     i=0
     songArray=[]
     for x in range(len(names)):
         if(i>100):
             break
         s=Song(names[x])
-        print (names[x])
-        s.setAlbumArtUrl(art[x])
+        s.setAlbumArtURL(art[x])
         songArray.append(s)
         i+=1
     return songArray 
 @app.route('/')
 def serveGUI():
-    getTopHits()
-    return render_template('index.html')
+    elements=getTopHits()
+    return render_template('index.html',elements=elements)
 @app.route('/search')
 def searchForSongs():
     name = request.args.get('songname')

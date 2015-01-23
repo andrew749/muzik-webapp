@@ -24,8 +24,9 @@
                 <div id="playerholder"></div>
             </div>
             <div id="content">
-
-
+                {% for x in elements%}
+                <div class="outerelement col-md-3"><img src="{{x.album}}"/><div class="element" id="14"><h2>{{x.title}}</h2></div></div>
+                {% endfor %}
             </div>
 
         </div>
