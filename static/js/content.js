@@ -34,14 +34,14 @@ $(document).ready(function(){
 });
 function handleSearch(e){
     $("#content").empty();
-    $(".page").siblings().remove();
+    $(".page").next().remove();
     var searchString=$("#searchtext").val();
     getSongs(searchString);
 
 }
 function handleSearchClick(e){
     $("#content").empty();
-    $(".page").siblings().remove();
+    $(".page").next().remove();
     getSongs(e);
 
 }

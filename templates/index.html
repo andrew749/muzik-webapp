@@ -11,18 +11,18 @@
         <script src="static/js/content.js"></script>
     </head>
     <body>
+        <div class="fixedheader">
+            <div id="searchbar">
+                <form id="searchform">
+                    <input id="searchtext" type="text" placeholder="Search" required/>
+                    <input id="searchbutton" type="button" value="Search" />
 
-        <div class="container-fluid page">
-            <div class="fixedheader">
-                <div id="searchbar">
-                    <form id="searchform">
-                        <input id="searchtext" type="text" placeholder="Search" required/>
-                        <input id="searchbutton" type="button" value="Search" />
-
-                    </form>
-                </div>
-                <div id="playerholder"></div>
+                </form>
             </div>
+            <div id="playerholder"></div>
+        </div>
+        <div class="container-fluid page">
+
             <div id="content">
                 {% for x in elements%}
                 <div onclick="handleSearchClick('{{x.title}}')" class="outerelement col-md-3"><img  src="{{x.album}}"/><div class="element" id="14"><h2>{{x.title}}</h2></div></div>
