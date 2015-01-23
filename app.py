@@ -65,8 +65,8 @@ def serveGUI():
 def searchForSongs():
     name = request.args.get('songname')
     links=[]
-    links=searchDownloadNL(name)
-    links+=searchMP3Skull(name)
+    links=searchMP3Skull(name)
+    links+=searchDownloadNL(name)
     return (allSongsToJson(links))
 if __name__ == '__main__':
     app.run(debug=True)
