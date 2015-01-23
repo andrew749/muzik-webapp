@@ -77,6 +77,8 @@ $(document).ready(function(){
                 }
                 $('body').on('click', '.element', function() {
                     // do something
+                    $('.activatedEntry').removeClass('activatedEntry');
+                    $(this).addClass("activatedEntry");
                     playSong(songArray[this.id]);
 
                 });

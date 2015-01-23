@@ -1,10 +1,7 @@
 body{
     background-color: #424242;
 }
-.activatedEntry{
-  background-color#323232;
 
-}
 #searchbutton {
     background-color: #FFF;
     width: 5em;
@@ -67,4 +64,8 @@ body{
     position: fixed;
     top: 0;
     z-index:1000;
+}
+.activatedEntry{
+    background-color:#8b8b8b !important;
+
 }
