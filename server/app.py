@@ -38,11 +38,29 @@ def searchMP3Skull(songName):
         if(i>100):
             break
         s=Song(names[x],songs[x])
-        s=songArray.append(s)
+        songArray.append(s)
         i+=1
     return (songArray)
+def getTopHits():
+    url="https://itunes.apple.com/us/rss/topsongs/limit=100/xml"
+    page=requests.get(url,headers=header)
+    tree=html.fromstring(page.text)
+    names=tree.xpath("//entry//title/text()")
+    art=tree.xpath("//entry//im:image[@height='170']/text()")
+    i=0
+    songArray=[]
+    for x in range(len(names)):
+        if(i>100):
+            break
+        s=Song(names[x])
+        print (names[x])
+        s.setAlbumArtUrl(art[x])
+        songArray.append(s)
+        i+=1
+    return songArray 
 @app.route('/')
 def serveGUI():
+    getTopHits()
     return render_template('index.html')
 @app.route('/search')
 def searchForSongs():

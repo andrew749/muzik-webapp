@@ -51,7 +51,10 @@ $(document).ready(function(){
         getSongs(searchString);
 
     }
-
+    function getTopHits(){
+        
+    
+    }
     function getSongs(songName){
         console.log(songName);
         $.ajax({
