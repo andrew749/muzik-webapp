@@ -10,9 +10,8 @@ $(document).ready(function(){
     var downloadsnllink="http://www.downloads.nl/results/mp3/1/";//add string of song to end
     var $container = $('#content');
     // initialize
-    $container.masonry({
-        columnWidth: 200,
-        itemSelector: '.item'
+    $container.imagesLoaded( function() {
+        $container.masonry({itemSelector:'.outerelement',isFitWidth:true});
     });
     var msnry = $container.data('masonry');
     $("#searchform").submit(function(e){
