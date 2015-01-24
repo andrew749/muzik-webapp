@@ -78,13 +78,13 @@ html{
 }
 
 #backbutton {
-    display: inline-block;
-
+    display: inline;
 }
 
 .fa-arrow-left:hover {
     color: #FFF;
 }
-.deactivatedarrow{
-    display: none;
+
+.deactivatedarrow {
+    opacity: 0;
 }

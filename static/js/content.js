@@ -5,10 +5,10 @@ function entry(title, url){
 }
 var audioPlayer=0;
 var songArray=[];
-
+var contentMain;
 $(document).ready(function(){
     var downloadsnllink="http://www.downloads.nl/results/mp3/1/";//add string of song to end
-    var contentMain=$(".outerelement");
+    contentMain=$(".outerelement");
     var $container = $('#content');
     // initialize
     $container.imagesLoaded( function() {
@@ -46,7 +46,12 @@ function handleSearchClick(e){
 
 }
 
-
+function goBack(){
+    $("#content").empty();
+    $(".page").next().remove();
+    console.log(contentMain);
+    $('#content').append(contentMain).masonry('appended',element,true);
+}
 function getSongs(songName){
     console.log(songName);
     $.ajax({
@@ -59,6 +64,10 @@ function getSongs(songName){
             var j=0;
             data=JSON.parse(data);
             songArray=[];
+            $("#backbutton").removeClass("deactivatedarrow");
+            $("#backbutton").click(function(){
+                goBack();
+            });
             for (var x in data){
                 if(j>amount)break;
                 j++;
