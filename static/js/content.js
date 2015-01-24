@@ -8,6 +8,7 @@ var songArray=[];
 
 $(document).ready(function(){
     var downloadsnllink="http://www.downloads.nl/results/mp3/1/";//add string of song to end
+    var contentMain=$(".outerelement");
     var $container = $('#content');
     // initialize
     $container.imagesLoaded( function() {
@@ -76,7 +77,9 @@ function getSongs(songName){
                 playSong(songArray[this.id]);
 
             });
+            var $container = $('#content');
 
+            // $container.masonry({itemSelector:'.outerelement',isFitWidth:true});
         }
     });
 }
@@ -86,10 +89,8 @@ function addSource(path){
 }
 function playSong(link){
     if(!audioPlayer){
-
         $("#playerholder").append($("<audio />",{autoPlay:'autoplay',controls:'controls', id:"ap", class:"col-md-12"}));
         audioPlayer=1;
-
     }
     addSource(link);
     console.log("doneadding");

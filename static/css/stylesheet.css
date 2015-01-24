@@ -13,6 +13,7 @@ html{
     height: auto;
     margin: 0 auto;
     position: relative;
+    display: inline-block;
 }
 
 #searchtext {
@@ -52,7 +53,7 @@ html{
     min-height: 100%;
     position: relative;
     margin-top: 10vh;
-    
+
 }
 
 #playerholder {
@@ -74,4 +75,16 @@ html{
 
 .albumImage {
     padding: 1.25em;
+}
+
+#backbutton {
+    display: inline-block;
+
+}
+
+.fa-arrow-left:hover {
+    color: #FFF;
+}
+.deactivatedarrow{
+    display: none;
 }
