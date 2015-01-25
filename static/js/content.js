@@ -34,6 +34,7 @@ $(document).ready(function(){
 });
 function handleSearch(e){
     $("#content").empty();
+    $("#content").height(0);
     $(".page").next().remove();
     var searchString=$("#searchtext").val();
     getSongs(searchString);
@@ -41,6 +42,7 @@ function handleSearch(e){
 }
 function handleSearchClick(e){
     $("#content").empty();
+    $("#content").height(0);
     $(".page").next().remove();
     getSongs(e);
 
@@ -49,8 +51,8 @@ function handleSearchClick(e){
 function goBack(){
     $("#content").empty();
     $(".page").next().remove();
-    console.log(contentMain);
-    $('#content').append(contentMain).masonry('appended',element,true);
+    $('#content').append(contentMain).masonry();
+    $("#backbutton").addClass("deactivatedarrow")
 }
 function getSongs(songName){
     console.log(songName);
@@ -76,7 +78,7 @@ function getSongs(songName){
                 var title=$("<h2/>").text(data[x].title);
                 element.append(innerelement);
                 innerelement.append(title);
-                $('#content').append(element).masonry('appended',element,true);
+                $('#content').append(element);
                 songArray.push(data[x].url);
             }
             $('body').on('click', '.element', function() {
@@ -86,13 +88,10 @@ function getSongs(songName){
                 playSong(songArray[this.id]);
 
             });
-            var $container = $('#content');
-
-            // $container.masonry({itemSelector:'.outerelement',isFitWidth:true});
+            $("#content").masonry({itemSelector:'.outerelement',isFitWidth:true});
         }
     });
 }
-
 function addSource(path){
     $("#ap").attr('src',path).trigger("play");
 }
