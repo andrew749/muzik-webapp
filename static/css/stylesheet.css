@@ -11,13 +11,13 @@ html{
 #searchbar {
     width: 90%;
     height: auto;
-    margin: 0 auto;
+    text-align: center;
     position: relative;
     display: inline-block;
 }
 
 #searchtext {
-    width: 80%;
+    width: 70vw;
     margin: 0 auto;
     font-size: 2em;
 

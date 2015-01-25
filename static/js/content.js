@@ -10,6 +10,7 @@ $(document).ready(function(){
     var downloadsnllink="http://www.downloads.nl/results/mp3/1/";//add string of song to end
     contentMain=$(".outerelement");
     var $container = $('#content');
+    $container.masonry('bindResize')
     // initialize
     $container.imagesLoaded( function() {
         $container.masonry({itemSelector:'.outerelement',isFitWidth:true});
