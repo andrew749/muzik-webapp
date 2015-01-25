@@ -88,7 +88,7 @@ function getSongs(songName){
                 playSong(songArray[this.id]);
 
             });
-            $("#content").masonry({itemSelector:'.outerelement',isFitWidth:true});
+            $("#content").masonry({itemSelector:'.outerelement',isFitWidth:true, isAnimated:true});
         }
     });
 }

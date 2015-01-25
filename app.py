@@ -4,6 +4,7 @@ from lxml import html
 import json
 from Song import *
 from urllib.parse import quote
+import youtubesearch
 app=Flask(__name__)
 header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0',}
 downloadsnllink="http://www.downloads.nl/results/mp3/1/";#add string of song to end
@@ -22,7 +23,10 @@ def searchDownloadNL(songName):
         songArray.append(s)
     return songArray
 def searchYouTube(songName):
-    url=""
+    url="https://gdata.youtube.com/feeds/api/videos?q="+str(quote(songName))+"&max-results=25"
+    page=requests.get(url, headers=header)
+    tree=html.fromstring(page.text)
+    elements=tree.xpath()
     songArray=[]
     return songArray
 def searchMP3Skull(songName):
