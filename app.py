@@ -3,8 +3,10 @@ import requests
 from lxml import html
 import lxml
 import json
+from lxml import etree
 from Song import *
 from urllib.parse import quote
+import pdb
 app=Flask(__name__)
 header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0',}
 downloadsnllink="http://www.downloads.nl/results/mp3/1/";#add string of song to end
@@ -23,12 +25,23 @@ def searchDownloadNL(songName):
         songArray.append(s)
     return songArray
 def searchYouTube(songName):
-    url="https://gdata.youtube.com/feeds/api/videos?q="+str(quote(songName))+"&max-results=25"
+    url="http://gdata.youtube.com/feeds/api/videos?q="+str(quote(songName))#+"&max-results=25"
+    print(url)
+    parser = etree.XMLParser(remove_blank_text=True)
+    print(1)
     page=requests.get(url, headers=header)
-    tree=lxml.etree.fromstring(page.text)
-    names=xpath_ns(tree,'//entry/title/text()')
-    links=xpath_ns(tree,"//entry/media:content/@url")
-    print(names," ",links)
+    print (2)
+    tree = etree.parse(page.text, parser)
+    root = tree.getroot()
+    namespaces = {'media':'http://search.yahoo.com/mrss/'}
+    items = iter(root.xpath('//entry/title/text()',
+                       namespaces=namespaces))
+    for item in items:
+        print (item)
+#    names=(tree,'//entry/title/text()')
+#    links=xpath_ns(tree,"//entry/media:content/@url")
+#    print(names," ",links)
+    print (root)
     songArray=[]
     return songArray
 def searchMP3Skull(songName):
@@ -47,13 +60,6 @@ def searchMP3Skull(songName):
         songArray.append(s)
         i+=1
     return (songArray)
-def xpath_ns(tree, expr):
-    "Parse a simple expression and prepend namespace wildcards where unspecified."
-    qual = lambda n: n if not n or ':' in n else '*[local-name() = "%s"]' % n
-    expr = '/'.join(qual(n) for n in expr.split('/'))
-    nsmap = dict((k, v) for k, v in tree.nsmap.items() if k)
-    return tree.xpath(expr, namespaces=nsmap)
-
 def getTopHits():
     url="https://itunes.apple.com/us/rss/topsongs/limit=100/xml"
     page=requests.get(url,headers=header)
@@ -77,10 +83,10 @@ def serveGUI():
 @app.route('/search')
 def searchForSongs():
     name = request.args.get('songname')
-    #searchYouTube(name)
+    searchYouTube(name)
     links=[]
-    links=searchMP3Skull(name)
-    links+=searchDownloadNL(name)
+#    links=searchMP3Skull(name)
+#    links+=searchDownloadNL(name)
     return (allSongsToJson(links))
 if __name__ == '__main__':
     app.run(debug=True)
