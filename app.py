@@ -76,6 +76,10 @@ def getTopHits():
         songArray.append(s)
         i+=1
     return songArray
+@app.route()
+def serveSong():
+    #elements=[]
+    return render_template('song.html',elements=elements)
 @app.route('/')
 def serveGUI():
     elements=getTopHits()
