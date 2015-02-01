@@ -80,6 +80,10 @@ def getTopHits():
 #def serveSong():
     ##elements=[]
     #return render_template('song.html',elements=elements)
+@app.route('/top')
+def getTop():
+    elements=getTopHits()
+    return (allSongsToJson(elements))
 @app.route('/')
 def serveGUI():
     elements=getTopHits()
