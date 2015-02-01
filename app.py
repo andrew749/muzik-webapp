@@ -88,9 +88,6 @@ def getTop():
 def serveGUI():
     elements=getTopHits()
     return render_template('index.html',elements=elements)
-@app.route('/top')
-    elements=getTopHits()
-    return allSongsToJson(elements) 
 @app.route('/search')
 def searchForSongs():
     name = request.args.get('songname')
