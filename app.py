@@ -18,10 +18,13 @@ downloadsnllink="http://www.downloads.nl/results/mp3/1/";#add string of song to 
 #TODO implement yourlisten
 """
 This function searches 4shared
+nevermind, would need to wait 20 seconds
+in future, download top hits for good quality
 """
-def search4Shared():
-    songArray=[]
-    return songArray
+#def search4Shared():
+    #url="http://search.4shared.com/network/searchXml.jsp?searchExtension=music/audio&q="
+    #songArray=[]
+    #return songArray
 """
 This function searches downloads.nl
 """
