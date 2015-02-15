@@ -12,6 +12,19 @@ app=Flask(__name__)
 header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0',}
 downloadsnllink="http://www.downloads.nl/results/mp3/1/";#add string of song to end
 #Seaches the site and returns an array of linksmum
+#TODO implement sound cloud
+#TODO implement groove shark
+#TODO implement goear
+#TODO implement yourlisten
+"""
+This function searches 4shared
+"""
+def search4Shared():
+    songArray=[]
+    return songArray
+"""
+This function searches downloads.nl
+"""
 def searchDownloadNL(songName):
     url=downloadsnllink+str(quote(songName))
     page=requests.get(url, headers=header)
@@ -25,6 +38,10 @@ def searchDownloadNL(songName):
         s=Song(songName,"http://www.downloads.nl"+songLink[0])
         songArray.append(s)
     return songArray
+"""
+This function searches youtube but is too slow.
+
+"""
 #def searchYouTube(songName):
     #url="https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyBSH5Wy0l4XSTif-8StQjmtJCcqu_uHE2c&q="+str(quote(songName))
     #parser = etree.XMLParser(remove_blank_text=True)
@@ -45,6 +62,9 @@ def searchDownloadNL(songName):
     #print (root)
     #songArray=[]
     #return songArray
+"""
+This function searches MP3 Skull
+"""
 def searchMP3Skull(songName):
     url="http://mp3skull.com/mp3/"+ str(songName.replace(' ','_')+".html")
     page=requests.get(url,headers=header)
@@ -60,6 +80,9 @@ def searchMP3Skull(songName):
         songArray.append(s)
         i+=1
     return (songArray)
+"""
+This function get the top 100 list from iTunes.
+"""
 def getTopHits():
     url="https://itunes.apple.com/us/rss/topsongs/limit=100/xml"
     page=requests.get(url,headers=header)
