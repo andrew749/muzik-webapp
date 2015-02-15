@@ -12,7 +12,6 @@ app=Flask(__name__)
 header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0',}
 downloadsnllink="http://www.downloads.nl/results/mp3/1/";#add string of song to end
 #Seaches the site and returns an array of linksmum
-#TODO implement sound cloud
 #TODO implement groove shark
 #TODO implement goear
 #TODO implement yourlisten
