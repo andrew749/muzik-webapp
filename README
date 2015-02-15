@@ -1,19 +1,21 @@
-#Play-webapp
+<h1>Play-webapp</h1>
 
-##A website that streams free music from a variety of sources.
+<h2>A website that streams free music from a variety of sources.
 Currently play is DMCA compliant. If for any change your conntent appears without consent, informme and I will take it down immediately.
-
-## This is the api that will be used by the Android, and soon to be iOS client for Muzik.
-###API Usage
-
-####Query
+</h2>
+<h3>API Usage
+</h3>
+<h4>Query
 Form an url with query parameter songname.
-```http://example.com/search?songname=NAME_OF_SONG```
+</h4>
+```javascript
+http://example.com/search?songname=NAME_OF_SONG
+```
 
 
-####Result
+<h4>Result
 The server will respond with a json encoded file with the following form:
-```json
+```javascript
 {
 title:"SongName",
 url:"url_to_song"
