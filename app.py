@@ -44,26 +44,17 @@ def searchDownloadNL(songName):
 This function searches youtube but is too slow.
 
 """
-#def searchYouTube(songName):
-    #url="https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyBSH5Wy0l4XSTif-8StQjmtJCcqu_uHE2c&q="+str(quote(songName))
-    #parser = etree.XMLParser(remove_blank_text=True)
-    #print(1)
-    #page=requests.get(url)
-    #page=urlopen(q)
-    #print (2)
-    #tree = etree.parse(page.text, parser)
-    #root = tree.getroot()
-    #namespaces = {'media':'http://search.yahoo.com/mrss/'}
-    #items = iter(root.xpath('//entry/title/text()',
-                       #namespaces=namespaces))
-    #for item in items:
-        #print (item)
-#    names=(tree,'//entry/title/text()')
-#    links=xpath_ns(tree,"//entry/media:content/@url")
-#    print(names," ",links)
-    #print (root)
-    #songArray=[]
-    #return songArray
+def searchYouTube(songName):
+    url="https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyBSH5Wy0l4XSTif-8StQjmtJCcqu_uHE2c&q="+str(quote(songName)+"&max-results=25")
+    page=requests.get(url)
+    temp=json.loads(page.text)
+    results=temp["items"]
+    songArray=[]
+    for element in results:
+        name=element["snippet"]["title"]
+        url="https://www.youtube.com/watch?v"+element["id"]["videoId"]
+        songArray.append(Song(name,url))
+    return songArray
 """
 This function searches MP3 Skull
 """
@@ -112,10 +103,10 @@ def serveGUI():
 @app.route('/search')
 def searchForSongs():
     name = request.args.get('songname')
-    #searchYouTube(name)
     links=[]
     links=searchMP3Skull(name)
     links+=searchDownloadNL(name)
+    links+=searchYouTube(name)
     return (allSongsToJson(links))
 if __name__ == '__main__':
     app.run(debug=True)
