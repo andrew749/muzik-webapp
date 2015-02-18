@@ -88,3 +88,34 @@ html{
 .deactivatedarrow {
     opacity: 0;
 }
+
+
+
+/*Styles for the welcome page.*/
+
+
+
+#welcome-body {
+    background-color: #FFF;
+    font-family: 'Lato';
+}
+
+
+#signup-button {
+}
+
+.welcome-page-button {
+    display: inline-block;
+    background-color: #2196F3;
+    border-radius: 5px;
+    font-size: 2em;
+    color: #fff;
+    padding: 0.5em;
+}
+
+#mainhero {
+    margin: 0 auto;
+    text-align: center;
+    padding:30%;
+}
+
