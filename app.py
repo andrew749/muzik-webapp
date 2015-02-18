@@ -52,7 +52,7 @@ def searchYouTube(songName):
     songArray=[]
     for element in results:
         name=element["snippet"]["title"]
-        url="https://www.youtube.com/watch?v"+element["id"]["videoId"]
+        url="https://www.youtube.com/embed/"+element["id"]["videoId"]+"?rel=0"
         songArray.append(Song(name,url))
     return songArray
 """

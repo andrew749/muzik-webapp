@@ -95,22 +95,27 @@ function getSongs(songName){
 function addSource(path){
   $("#ap").attr('src',path).trigger("play");
 }
+var isYoutube=false;
 function playSong(link){
   //handle adding the audio player to the page.
-  var isYoutube=false;
   if(!audioPlayer){
     if(link.search("youtube")){
       isYoutube=true;
-      $("#playerholder").append($("<iframe/>",{height:100, width:500,src:link}));
+      $("audio").remove();
+      $("#playerholder").append($("<iframe/>",{height:100, width:500}));
+
     }else{
+      isYoutube=false;
+      $("iframe").remove();
       $("#playerholder").append($("<audio />",{autoPlay:'autoplay',controls:'controls', id:"ap", class:"col-md-12"}));
+
     }
     audioPlayer=1;
   }
   if(!isYoutube){
     addSource(link);
   }else{
-
+    $("iframe").attr("src", link);
   }
 
 }
