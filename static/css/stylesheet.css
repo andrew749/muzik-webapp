@@ -94,7 +94,6 @@ html{
 /*Styles for the welcome page.*/
 
 
-
 #welcome-body {
     background-color: #FFF;
     font-family: 'Lato';
@@ -114,8 +113,19 @@ html{
 }
 
 #mainhero {
-    margin: 0 auto;
     text-align: center;
-    padding:30%;
+    padding:20%;
 }
 
+div #mainbackground {
+    width: 100%;
+    position: absolute;
+    top: 0;
+}
+
+#canvasholder {
+    width: 90%;
+    height: 70%;
+    position: absolute;
+    background-color: #FEFEFE;
+}
