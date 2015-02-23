@@ -110,6 +110,7 @@ html{
     font-size: 2em;
     color: #fff;
     padding: 0.5em;
+    margin: 0 auto;
 }
 
 #mainhero {
@@ -128,4 +129,11 @@ div #mainbackground {
     height: 70%;
     position: absolute;
     background-color: #FEFEFE;
+}
+#optionsbar {
+    display: block;
+    text-align: center;
+    margin:0  auto;
+    width: 50%;
+    
 }
