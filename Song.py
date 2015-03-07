@@ -10,3 +10,5 @@ class Song:
 def allSongsToJson(songs):
     jsonstring=""
     return json.dumps([{"title":x.title,"url":x.url}for x in songs],indent=4)
+def allHitsToJson(songs):
+    return json.dumps([{"title":x.title,"url":x.album}for x in songs],indent=4)
