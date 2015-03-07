@@ -17,3 +17,5 @@ title:"SongName",
 url:"url_to_song"
 }
 ```
+<h3>Reporting Issues</h3>
+To report any api issues, email me at andrewcod749@gmail.com
