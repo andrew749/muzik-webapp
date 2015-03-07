@@ -95,7 +95,7 @@ def getTopHits():
 @app.route('/top')
 def getTop():
     elements=getTopHits()
-    return (allSongsToJson(elements))
+    return (allHitsToJson(elements))
 @app.route('/')
 def serveGUI():
     elements=getTopHits()
