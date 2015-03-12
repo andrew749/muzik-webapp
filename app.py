@@ -15,18 +15,6 @@ downloadsnllink="http://www.downloads.nl/results/mp3/1/";#add string of song to 
 #TODO implement groove shark
 #TODO implement goear
 #TODO implement yourlisten
-"""
-This function searches 4shared
-nevermind, would need to wait 20 seconds
-in future, download top hits for good quality
-"""
-#def search4Shared():
-    #url="http://search.4shared.com/network/searchXml.jsp?searchExtension=music/audio&q="
-    #songArray=[]
-    #return songArray
-"""
-This function searches downloads.nl
-"""
 def searchDownloadNL(songName):
     url=downloadsnllink+str(quote(songName))
     page=requests.get(url, headers=header)
@@ -40,6 +28,10 @@ def searchDownloadNL(songName):
         s=Song(songName,"http://www.downloads.nl"+songLink[0])
         songArray.append(s)
     return songArray
+#method to search local datastore and see if there is a verified link
+def getVerifiedLinks(songName):
+
+    return False;
 """
 This function searches youtube but is too slow.
 
@@ -92,14 +84,21 @@ def getTopHits():
         songArray.append(s)
         i+=1
     return songArray
+
 @app.route('/top')
 def getTop():
     elements=getTopHits()
     return (allHitsToJson(elements))
+@app.route('/landing')
+
+def serveLanding():
+    return render_template('landingpage.html')
+
 @app.route('/')
 def serveGUI():
     elements=getTopHits()
     return render_template('index.html',elements=elements)
+
 @app.route('/search')
 def searchForSongs():
     name = request.args.get('songname')
