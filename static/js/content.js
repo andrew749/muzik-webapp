@@ -1,7 +1,6 @@
 function entry(title, url){
   this.title=title;
   this.url=url;
-
 }
 var audioPlayer=0;
 var songArray=[];
@@ -79,7 +78,7 @@ function getSongs(songName){
         element.append(innerelement);
         innerelement.append(title);
         $('#content').append(element);
-        songArray.push(data[x].url);
+        songArray.push(data[x].url[0]);
       }
       $('body').on('click', '.element', function() {
         // do something

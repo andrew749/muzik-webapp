@@ -1,14 +1,30 @@
 import json
+"""
+Takes parameters title, url, artist, album art url.
+
+Can create json for songs or hits.
+
+"""
 class Song:
-    def __init__(self,title, url=None):
+    def __init__(self,title, url=None,artist="Unknown Artist",albumArtUrl=None,album="Unkown Album"):
+        self.verified=False
         self.title=title
-        self.url=url
+        self.url=[url]
+        self.artist=artist
+        self.albumArt=albumArtUrl
+        self.album=album
     def songToJson(self):
-        return json.dumps({"title":self.title,"url":self.url,"albumUrl":self.album})
+        return {"title":self.title,"url":self.url,"albumArt":self.albumArt,"artist":self.artist,"album":self.album,"verified":self.verified}
     def setAlbumArtURL(self, albumArtUrl):
-        self.album=albumArtUrl
+        self.albumArt=albumArtUrl
+    def addURL(self,url):
+        self.url.append(url)
+    def setArtist(self, artist):
+        self.artist=artist
+#condition should be true or false
+    def setVerified(self,condition):
+        self.verified=condition
+    def deleteUrl(self, position):
+        self.url.pop(position)
 def allSongsToJson(songs):
-    jsonstring=""
-    return json.dumps([{"title":x.title,"url":x.url}for x in songs],indent=4)
-def allHitsToJson(songs):
-    return json.dumps([{"title":x.title,"url":x.album}for x in songs],indent=4)
+    return json.dumps([x.songToJson()for x in songs],indent=4)

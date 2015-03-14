@@ -34,7 +34,6 @@ def getVerifiedLinks(songName):
     return False;
 """
 This function searches youtube but is too slow.
-
 """
 def searchYouTube(songName):
     url="https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyBSH5Wy0l4XSTif-8StQjmtJCcqu_uHE2c&q="+str(quote(songName)+"&max-results=25")
@@ -88,9 +87,8 @@ def getTopHits():
 @app.route('/top')
 def getTop():
     elements=getTopHits()
-    return (allHitsToJson(elements))
+    return (allSongsToJson(elements))
 @app.route('/landing')
-
 def serveLanding():
     return render_template('landingpage.html')
 
