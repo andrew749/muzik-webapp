@@ -42,9 +42,12 @@ def searchYouTube(songName):
     results=temp["items"]
     songArray=[]
     for element in results:
-        name=element["snippet"]["title"]
-        url="https://www.youtube.com/embed/"+element["id"]["videoId"]+"?rel=0"
-        songArray.append(Song(name,url))
+        try:
+            name=element["snippet"]["title"]
+            url="https://www.youtube.com/embed/"+element["id"]["videoId"]+"?rel=0"
+            songArray.append(Song(name,url))
+        except Exception as e:
+            print(e)
     return songArray
 """
 This function searches MP3 Skull
