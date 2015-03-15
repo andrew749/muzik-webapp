@@ -48,7 +48,7 @@ html{
 
 }
 .outerelement:hover{
--webkit-transform:translateZ(100);
+-webkit-transform:scale(1.05)
 }
 .page {
     background-color: #424242;

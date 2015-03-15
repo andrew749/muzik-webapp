@@ -1,0 +1,11 @@
+.card{
+
+background-color:#FEF;
+height:20%;
+width:30%;
+}
+.card:hover{
+transform:scale(1.05);
+
+}
+
