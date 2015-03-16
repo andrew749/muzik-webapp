@@ -35,6 +35,8 @@ def getVerifiedLinks(songName):
 """
 This function searches youtube but is too slow.
 """
+def followTrendingMP3Link(url):
+    return None
 def searchYouTube(songName):
     url="https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyBSH5Wy0l4XSTif-8StQjmtJCcqu_uHE2c&q="+str(quote(songName)+"&max-results=25")
     page=requests.get(url)
