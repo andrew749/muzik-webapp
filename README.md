@@ -14,7 +14,10 @@ The server will respond with a json encoded file with the following form:
 ```javascript
 {
 title:"SongName",
-url:"url_to_song"
+url:[array of urls]
+albumArt:"album art url",
+artist:"song artist",
+verified:"whether or not the song has a verified link"
 }
 ```
 <h3>Reporting Issues</h3>
