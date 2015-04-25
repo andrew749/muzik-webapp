@@ -98,17 +98,17 @@ var isYoutube=false;
 function playSong(link){
   //handle adding the audio player to the page.
   if(!audioPlayer){
-    if(link.search("youtube")){
-      isYoutube=true;
-      $("audio").remove();
-      $("#playerholder").append($("<iframe/>",{height:100, width:500}));
+    //if(link.search("youtube")){
+      //isYoutube=true;
+      //$("audio").remove();
+      //$("#playerholder").append($("<iframe/>",{height:100, width:500}));
 
-    }else{
+    //}else{
       isYoutube=false;
       $("iframe").remove();
       $("#playerholder").append($("<audio />",{autoPlay:'autoplay',controls:'controls', id:"ap", class:"col-md-12"}));
 
-    }
+    //}
     audioPlayer=1;
   }
   if(!isYoutube){

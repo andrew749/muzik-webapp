@@ -61,10 +61,20 @@ def serveGUI():
 def searchForSongs():
     name = request.args.get('songname')
     links=[]
-    links=mp3skull.searchMP3Skull(name)
-    links+=DownloadNL.searchDownloadNL(name)
-    links+=YouTube.searchYouTube(name)
-    links+=mp3raid.getMP3RaidSongs(name)
+    links_mp3skull=mp3skull.searchMP3Skull(name)
+    links_downloadnl=DownloadNL.searchDownloadNL(name)
+    links_mp3raid=mp3raid.getMP3RaidSongs(name)
+    if(links_mp3raid is not None):
+        links+=links_mp3raid
+    if(links_mp3skull is not None):
+        links+=links_mp3skull
+    if(links_downloadnl is not None):
+        links+=links_downloadnl
+
+    if(links is None):
+        links_youtube=YouTube.searchYouTube(name)
+        links+=links_youtube
+
     return (allSongsToJson(links))
 
 if __name__ == '__main__':
