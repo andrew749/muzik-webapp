@@ -18,9 +18,13 @@ def searchDownloadNL(songName):
     songArray=[]
     for song in elements:
         songLink=song.xpath("@href")
-        songText=song.xpath("b//span/text()")
-        print (songLink," ",songText)
-        s=Song(songName,"http://www.downloads.nl"+songLink[0])
+        songText=song.xpath("b//text()")
+        name=""
+        for i in songText:
+            name+=i
+        print(name, songLink)
+        s=Song(name,"http://www.downloads.nl"+songLink[0])
         songArray.append(s)
     return songArray
 
+searchDownloadNL("Safety Dance")
