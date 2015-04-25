@@ -30,11 +30,7 @@ def searchDownloadNL(songName):
     return songArray
 #method to search local datastore and see if there is a verified link
 def getVerifiedLinks(songName):
-
     return False;
-"""
-This function searches youtube but is too slow.
-"""
 def followTrendingMP3Link(url):
     return None
 def searchYouTube(songName):
@@ -50,7 +46,7 @@ def searchYouTube(songName):
             songArray.append(Song(name,url))
         except Exception as e:
             print(e)
-    return songArray
+            return songArray
 """
 This function searches MP3 Skull
 """
@@ -68,7 +64,7 @@ def searchMP3Skull(songName):
         s=Song(names[x],songs[x])
         songArray.append(s)
         i+=1
-    return (songArray)
+        return (songArray)
 """
 This function get the top 100 list from iTunes.
 """
@@ -87,7 +83,7 @@ def getTopHits():
         s.setAlbumArtURL(art[x])
         songArray.append(s)
         i+=1
-    return songArray
+        return songArray
 
 @app.route('/top')
 def getTop():
