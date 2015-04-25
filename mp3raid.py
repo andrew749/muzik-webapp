@@ -10,7 +10,7 @@ import pdb
 from urllib.request import urlopen,Request
 url="http://www.mp3raid.ws/download/"
 header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0',}
-def getSongs(songName):
+def getMP3RaidSongs(songName):
     end=songName.replace(" ","_")+".html"
     concaturl=url+end
     page=requests.get(concaturl,headers=header)

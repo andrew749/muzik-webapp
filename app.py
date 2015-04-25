@@ -11,7 +11,7 @@ from urllib.request import urlopen,Request
 import mp3skull
 import DownloadNL
 import YouTube
-
+import mp3raid
 header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0',}
 app=Flask(__name__)
 #Seaches the site and returns an array of linksmum
@@ -64,6 +64,7 @@ def searchForSongs():
     links=mp3skull.searchMP3Skull(name)
     links+=DownloadNL.searchDownloadNL(name)
     links+=YouTube.searchYouTube(name)
+    links+=mp3raid.getMP3RaidSongs(name)
     return (allSongsToJson(links))
 
 if __name__ == '__main__':
