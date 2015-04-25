@@ -19,14 +19,11 @@ def getSongs(songName):
     songArray=[]
     for song in elements:
         nexturl="http://www.mp3raid.ws/search/ddl/"+song.xpath("@id")[0]+"/"+end
-        print(nexturl)
         page2=requests.get(nexturl,headers=header)
         tree2=html.fromstring(page2.text)
-        pdb.set_trace()
-        songName=tree2.xpath("//table/tr/*[1]/td/*[2]/text()")
+        songName=tree2.xpath("//table/tr/*[2]/text()")[0]
         print(songName)
-        pdb.set_trace()
-        songURL=tree2.xpath("//table/tr/*[2]/td/*[2]/text()")
+        songURL=tree2.xpath("//table/tr/*[2]/text()")[1]
         print(songURL)
         songArray.append(Song(songName,songURL))
 
