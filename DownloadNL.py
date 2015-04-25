@@ -27,4 +27,3 @@ def searchDownloadNL(songName):
         songArray.append(s)
     return songArray
 
-searchDownloadNL("Safety Dance")
