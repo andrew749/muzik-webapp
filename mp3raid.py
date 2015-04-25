@@ -26,5 +26,4 @@ def getSongs(songName):
         songURL=tree2.xpath("//table/tr/*[2]/text()")[1]
         print(songURL)
         songArray.append(Song(songName,songURL))
-
-getSongs("hooked on a feeling")
+    return songArray
