@@ -148,3 +148,6 @@ div #mainbackground {
     bottom:0;
     z-index:100;
 }
+#playerbar{
+    display:none;
+}

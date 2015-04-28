@@ -2,6 +2,7 @@ function entry(title, url){
   this.title=title;
   this.url=url;
 }
+var firsttime=true;
 var audioPlayer=0;
 var songArray=[];
 var contentMain;
@@ -96,6 +97,9 @@ function addSource(path){
 }
 var isYoutube=false;
 function playSong(link){
+  if(firsttime){
+  $("#playerbar").css("display","block");
+  }
   //handle adding the audio player to the page.
   if(!audioPlayer){
     $("iframe").remove();
