@@ -59,12 +59,12 @@ html{
     margin-top: 10vh;
 
 }
-
 #playerholder {
     display:block;
     text-align:center;
+    top:50%;
+    position:relative;
 }
-
 .fixedheader {
     position: fixed;
     top: 0;
@@ -144,7 +144,7 @@ div #mainbackground {
     position:fixed;
     background-color:rgba(117,117,117,.9);
     width:100%;
-    height:100px;
+    height:60px;
     bottom:0;
     z-index:100;
 }
