@@ -63,13 +63,13 @@ def searchForSongs():
     links=[]
     links_mp3skull=mp3skull.searchMP3Skull(name)
     links_downloadnl=DownloadNL.searchDownloadNL(name)
-    #links_mp3raid=mp3raid.getMP3RaidSongs(name)
+    links_mp3raid=mp3raid.getMP3RaidSongs(name)
     if(links_mp3skull is not None):
         links+=links_mp3skull
     if(links_downloadnl is not None):
         links+=links_downloadnl
-    #if(links_mp3raid is not None):
-        #links+=links_mp3raid
+    if(links_mp3raid is not None):
+        links+=links_mp3raid
     if(links is None):
         links_youtube=YouTube.searchYouTube(name)
         links+=links_youtube
