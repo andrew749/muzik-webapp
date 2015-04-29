@@ -22,8 +22,8 @@ def getMP3RaidSongs(songName):
         page2=requests.get(nexturl,headers=header)
         tree2=html.fromstring(page2.text)
         songName=tree2.xpath("//table/tr/*[2]/text()")[0]
-        print(songName)
+        #print(songName)
         songURL=tree2.xpath("//table/tr/*[2]/text()")[1]
-        print(songURL)
+        #print(songURL)
         songArray.append(Song(songName,songURL))
     return songArray
