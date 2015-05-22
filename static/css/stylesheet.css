@@ -64,6 +64,7 @@ html{
     text-align:center;
     top:50%;
     position:relative;
+    box-shadow:1px 1px 2px #000000;
 }
 .fixedheader {
     position: fixed;
@@ -73,6 +74,7 @@ html{
     height:auto;
     background-color: rgba(255, 255, 255, 0.70);
     text-align:center;
+    box-shadow:1px 1px 2px #000000;
 }
 .activatedEntry{
     background-color:#8b8b8b !important;
