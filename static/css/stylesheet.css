@@ -4,7 +4,7 @@ html{
 
 #searchbutton {
     background-color: #FFF;
-    width: 5%;
+    width: 10%;
     font-size: 2em;
 }
 
@@ -18,7 +18,7 @@ html{
 }
 
 #searchtext {
-    width: 90%;
+    width: 80%;
     margin: 0 auto;
     font-size: 2em;
 
