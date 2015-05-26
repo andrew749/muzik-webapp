@@ -6,10 +6,10 @@ var firsttime=true;
 var audioPlayer=0;
 var songArray=[];
 var contentMain;
+var spinner;
 $(document).ready(function(){
   contentMain=$(".outerelement");
   var $container = $('#content');
-  $container.masonry('bindResize')
   // initialize
   $container.imagesLoaded( function() {
     $container.masonry({itemSelector:'.outerelement',isFitWidth:true});
@@ -43,25 +43,57 @@ function handleSearch(e){
 function handleSearchClick(e){
   $("#content").empty();
   $("#content").height(0);
-  $(".page").next().remove();
+  //$(".page").next().remove();
   getSongs(e);
-
-}
+  }
 
 function goBack(){
   $("#content").empty();
-  $(".page").next().remove();
+  //$(".page").next().remove();
   $('#content').append(contentMain).masonry();
   $("#backbutton").addClass("deactivatedarrow")
 }
+var opts = {
+    lines: 13, // The number of lines to draw
+    length: 20, // The length of each line
+    width: 10, // The line thickness
+    radius: 30, // The radius of the inner circle
+    corners: 1, // Corner roundness (0..1)
+    rotate: 0, // The rotation offset
+    direction: 1, // 1: clockwise, -1: counterclockwise
+    color: '#FFF', // #rgb or #rrggbb or array of colors
+    speed: 1, // Rounds per second
+    trail: 60, // Afterglow percentage
+    shadow: false, // Whether to render a shadow
+    hwaccel: false, // Whether to use hardware acceleration
+    className: 'spinner', // The CSS class to assign to the spinner
+    zIndex: 2e9, // The z-index (defaults to 2000000000)
+    top: '50%', // Top position relative to parent
+    left: '50%', // Left position relative to parent
+    padding:10
+  };
+function showLoadingDialog(){
+  $('#spinner').removeClass('hidden');
+  $("#spinner").addClass("dialog");
+  var target=document.getElementById("spinner");
+  spinner = new Spinner(opts).spin(target);
+}
+function stopLoadingDialog(){
+  spinner.stop();
+  $('#spinner').removeClass('dialog');
+  $('#spinner').addClass('hidden');
+}
+
 function getSongs(songName){
   console.log(songName);
+  showLoadingDialog();
   $.ajax({
     url:  "/search",
     type: 'GET',
     data:{'songname':songName},
     datatype:'jsonp',
     success: function(data) {
+      stopLoadingDialog();
       var amount=30;
       var j=0;
       data=JSON.parse(data);

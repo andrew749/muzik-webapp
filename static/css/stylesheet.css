@@ -52,7 +52,7 @@ html{
 -webkit-transform:scale(1.05)
 }
 .page {
-    background-color: #424242;
+    background-color:#424242;
     height:auto;
     min-height: 100%;
     position: relative;
@@ -152,4 +152,23 @@ div #mainbackground {
 }
 #playerbar{
     display:none;
+}
+#spinner{
+}
+.hidden{
+  display:none;
+}
+.dialog{
+  position:fixed;
+  width:40%;
+  height:20%;
+  text-align:center;
+  top:25%;
+  left:30%;
+}
+#spinner p{
+  display:block;
+}
+.spinner{
+  display:block;
 }
