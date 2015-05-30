@@ -28,19 +28,15 @@ This function get the top 100 list from iTunes.
 """
 def getTopHits():
     url="https://itunes.apple.com/us/rss/topsongs/limit=100/xml"
-    page=requests.get(url,headers=header)
-    tree=html.fromstring(page.content)
-    names=tree.xpath("//entry//title/text()")
-    art=tree.xpath("//entry//*[@height='170']/text()")
-    i=0
+    namespaces={'im':'http://itunes.apple.com/rss','xmlns':"http://www.w3.org/2005/Atom"}
     songArray=[]
-    for x in range(len(names)):
-        if(i>100):
-            break
-        s=Song(names[x])
-        s.setAlbumArtURL(art[x])
+    page=requests.get(url,headers=header)
+    tree=etree.fromstring(page.content)
+    for x in tree.findall('xmlns:entry',namespaces):
+        s=Song(x.find('im:name',namespaces).text)
+        s.setArtist(x.find('im:artist',namespaces).text)
+        s.setAlbumArtURL(x.find('im:image[@height="170"]',namespaces).text)
         songArray.append(s)
-        i+=1
     return songArray
 
 @app.route('/top')

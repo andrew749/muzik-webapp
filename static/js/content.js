@@ -61,7 +61,7 @@ var opts = {
     corners: 1, // Corner roundness (0..1)
     rotate: 0, // The rotation offset
     direction: 1, // 1: clockwise, -1: counterclockwise
-    color: '#FFF', // #rgb or #rrggbb or array of colors
+    color: '#000', // #rgb or #rrggbb or array of colors
     speed: 1, // Rounds per second
     trail: 60, // Afterglow percentage
     shadow: false, // Whether to render a shadow
@@ -108,8 +108,10 @@ function getSongs(songName){
         var element=$("<div/>").addClass("outerelement col-md-3");
         var innerelement=$("<div/>").addClass("element").attr('id',x);
         var title=$("<h2/>").text(data[x].title);
+        var artist=$("<h3/>").text(data[x].artist);
         element.append(innerelement);
         innerelement.append(title);
+        innerelement.append(artist);
         $('#content').append(element);
         songArray.push(data[x].url[0]);
       }

@@ -1,13 +1,11 @@
-html{
-    background-color: #424242;
-}
-
 #searchbutton {
     background-color: #FFF;
     width: 10%;
     font-size: 2em;
 }
-
+#searchform{
+  margin-bottom:0px;
+}
 #searchbar {
     width: 80%;
     height: auto;
@@ -52,7 +50,7 @@ html{
 -webkit-transform:scale(1.05)
 }
 .page {
-    background-color:#424242;
+    background-color:#EFEFEF;
     height:auto;
     min-height: 100%;
     position: relative;
@@ -71,7 +69,7 @@ html{
     top: 0;
     z-index:1000;
     width: 100%;
-    height:auto;
+    height: 10vh;
     background-color: rgba(255, 255, 255, 0.70);
     text-align:center;
     box-shadow:1px 1px 2px #000000;
@@ -87,6 +85,7 @@ html{
 
 #backbutton {
     display: inline;
+    width:10px;
 }
 
 .fa-arrow-left:hover {

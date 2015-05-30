@@ -26,5 +26,7 @@ class Song:
         self.verified=condition
     def deleteUrl(self, position):
         self.url.pop(position)
+    def setAlbum(self,album):
+        self.album=album
 def allSongsToJson(songs):
     return json.dumps([x.songToJson()for x in songs],indent=4)
