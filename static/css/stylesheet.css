@@ -44,7 +44,6 @@
 }
 .outerelement{
     padding: 10px;
-
 }
 .outerelement:hover{
 -webkit-transform:scale(1.05)
@@ -81,6 +80,8 @@
 
 .albumImage {
     padding: 1.25em;
+    display:inline-block;
+    width:40%
 }
 
 #backbutton {
@@ -170,4 +171,12 @@ div #mainbackground {
 }
 .spinner{
   display:block;
+}
+.title{
+  display:block;
+}
+.info_holder{
+  display:inline-block;
+  width:50%;
+  text-align:left;
 }

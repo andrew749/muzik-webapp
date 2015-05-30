@@ -31,7 +31,7 @@
 
             <div id="content">
                 {% for x in elements%}
-                <div onclick="handleSearchClick('{{x.title}}')" class="outerelement col-md-3"><div class="element" id="14"><img class="albumImage"  src="{{x.albumArt}}"/><h2>{{x.title}}</h2></div></div>
+                <div onclick="handleSearchClick('{{x.title}}')" class="outerelement col-md-4"><div class="element" id="14"><img class="albumImage"  src="{{x.albumArt}}"/><div class="info_holder"><h4 class="title">{{x.title}}</h4><h5 class="artist">{{x.artist}}</h5></div></div></div>
                 {% endfor %}
             </div>
 

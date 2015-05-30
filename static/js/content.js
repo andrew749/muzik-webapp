@@ -108,10 +108,8 @@ function getSongs(songName){
         var element=$("<div/>").addClass("outerelement col-md-3");
         var innerelement=$("<div/>").addClass("element").attr('id',x);
         var title=$("<h2/>").text(data[x].title);
-        var artist=$("<h3/>").text(data[x].artist);
         element.append(innerelement);
         innerelement.append(title);
-        innerelement.append(artist);
         $('#content').append(element);
         songArray.push(data[x].url[0]);
       }
