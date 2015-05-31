@@ -56,6 +56,7 @@ def serveGUI():
 @app.route('/search')
 def searchForSongs():
     name = request.args.get('songname')
+    name.replace("'","\'");
     links=[]
     links_mp3skull=mp3skull.searchMP3Skull(name)
     links_downloadnl=DownloadNL.searchDownloadNL(name)
