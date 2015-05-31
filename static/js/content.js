@@ -46,33 +46,33 @@ function handleSearchClick(e){
   $(".page").next().remove();
   $('#searchtext').val(e);
   getSongs(e);
-  }
+}
 
 function goBack(){
   $("#content").empty();
-  //$(".page").next().remove();
+  $(".page").next().remove();
   $('#content').append(contentMain).masonry();
   $("#backbutton").addClass("deactivatedarrow")
 }
 var opts = {
-    lines: 13, // The number of lines to draw
-    length: 20, // The length of each line
-    width: 10, // The line thickness
-    radius: 30, // The radius of the inner circle
-    corners: 1, // Corner roundness (0..1)
-    rotate: 0, // The rotation offset
-    direction: 1, // 1: clockwise, -1: counterclockwise
-    color: '#000', // #rgb or #rrggbb or array of colors
-    speed: 1, // Rounds per second
-    trail: 60, // Afterglow percentage
-    shadow: false, // Whether to render a shadow
-    hwaccel: false, // Whether to use hardware acceleration
-    className: 'spinner', // The CSS class to assign to the spinner
-    zIndex: 2e9, // The z-index (defaults to 2000000000)
-    top: '50%', // Top position relative to parent
-    left: '50%', // Left position relative to parent
-    padding:10
-  };
+  lines: 13, // The number of lines to draw
+  length: 20, // The length of each line
+  width: 10, // The line thickness
+  radius: 30, // The radius of the inner circle
+  corners: 1, // Corner roundness (0..1)
+  rotate: 0, // The rotation offset
+  direction: 1, // 1: clockwise, -1: counterclockwise
+  color: '#000', // #rgb or #rrggbb or array of colors
+  speed: 1, // Rounds per second
+  trail: 60, // Afterglow percentage
+  shadow: false, // Whether to render a shadow
+  hwaccel: false, // Whether to use hardware acceleration
+  className: 'spinner', // The CSS class to assign to the spinner
+  zIndex: 2e9, // The z-index (defaults to 2000000000)
+  top: '50%', // Top position relative to parent
+  left: '50%', // Left position relative to parent
+  padding:10
+};
 function showLoadingDialog(){
   $('#spinner').removeClass('hidden');
   $("#spinner").addClass("dialog");
@@ -84,11 +84,20 @@ function stopLoadingDialog(){
   $('#spinner').removeClass('dialog');
   $('#spinner').addClass('hidden');
 }
-
+var request;
+function backArrowHandle(){
+  $("#backbutton").removeClass("deactivatedarrow");
+  $("#backbutton").click(function(){
+    goBack();
+    stopLoadingDialog();
+    request.abort();
+  });
+  }
 function getSongs(songName){
   console.log(songName);
+  backArrowHandle();
   showLoadingDialog();
-  $.ajax({
+  request=$.ajax({
     url:  "/search",
     type: 'GET',
     data:{'songname':songName},
@@ -99,10 +108,6 @@ function getSongs(songName){
       var j=0;
       data=JSON.parse(data);
       songArray=[];
-      $("#backbutton").removeClass("deactivatedarrow");
-      $("#backbutton").click(function(){
-        goBack();
-      });
       for (var x in data){
         if(j>amount)break;
         j++;
@@ -131,7 +136,7 @@ function addSource(path){
 var isYoutube=false;
 function playSong(link){
   if(firsttime){
-  $("#playerbar").css("display","block");
+    $("#playerbar").css("display","block");
   }
   //handle adding the audio player to the page.
   if(!audioPlayer){
