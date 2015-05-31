@@ -43,7 +43,8 @@ function handleSearch(e){
 function handleSearchClick(e){
   $("#content").empty();
   $("#content").height(0);
-  //$(".page").next().remove();
+  $(".page").next().remove();
+  $('#searchtext').val(e);
   getSongs(e);
   }
 
