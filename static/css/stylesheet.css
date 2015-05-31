@@ -1,13 +1,13 @@
 #searchbutton {
     background-color: #FFF;
     width: 10%;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 #searchform{
   margin-bottom:0px;
 }
 #searchbar {
-    width: 80%;
+    width: 70%;
     margin:0 auto;
     text-align: center;
     position: relative;
@@ -18,7 +18,15 @@
 #searchtext {
     width: 80%;
     margin: 0 auto;
-    font-size: 2em;
+    font-size: 1.5em;
+}
+@media(max-width:1000px){
+  #searchtext{
+    width:70%;
+  }
+  #searchbutton{
+  width:20%;
+  }
 }
 #content{
     margin: 0 auto;
