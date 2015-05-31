@@ -47,6 +47,7 @@
 }
 .element:hover{
     box-shadow:1px 1px 1px #000;
+    -webkit-transform:scale(1.05);
 }
 .outerelement .element{
     width: 100%;
@@ -54,9 +55,6 @@
 }
 .outerelement{
     padding: 10px;
-}
-.outerelement:hover{
-  -webkit-transform:scale(1.05);
 }
 .page {
     background-color:#EFEFEF;
