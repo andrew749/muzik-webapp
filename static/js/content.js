@@ -104,13 +104,9 @@ function getSongs(songName){
     datatype:'jsonp',
     success: function(data) {
       stopLoadingDialog();
-      var amount=30;
-      var j=0;
       data=JSON.parse(data);
       songArray=[];
       for (var x in data){
-        if(j>amount)break;
-        j++;
         var element=$("<div/>").addClass("outerelement col-md-2");
         var innerelement=$("<div/>").addClass("element").attr('id',x);
         var title=$("<h4/>").text(data[x].title);
@@ -133,7 +129,6 @@ function getSongs(songName){
 function addSource(path){
   $("#ap").attr('src',path).trigger("play");
 }
-var isYoutube=false;
 function playSong(link){
   if(firsttime){
     $("#playerbar").css("display","block");
