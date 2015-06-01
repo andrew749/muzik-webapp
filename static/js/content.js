@@ -92,7 +92,7 @@ function backArrowHandle(){
     stopLoadingDialog();
     request.abort();
   });
-  }
+}
 function getSongs(songName){
   console.log(songName);
   backArrowHandle();
@@ -129,10 +129,25 @@ function getSongs(songName){
 function addSource(path){
   $("#ap").attr('src',path).trigger("play");
 }
+var playing=false;
 function playSong(link){
   if(firsttime){
     $("#playerbar").css("display","block");
   }
+  $('body').keyup(function(e){
+    var play=$('#ap')[0];
+    e.preventDefault();
+    if(!$('#searchtext').is(":focus")){
+      if(e.keyCode==32){
+        if(play.paused==false){
+          play.pause();
+        }
+        else{
+          play.play();
+        }
+      }
+    }
+  });
   //handle adding the audio player to the page.
   if(!audioPlayer){
     $("iframe").remove();
