@@ -4,6 +4,7 @@
     font-size: 1.5em;
 }
 #searchform{
+  display:inline;
   margin-bottom:0px;
 }
 #searchbar {
