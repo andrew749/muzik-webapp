@@ -33,8 +33,8 @@ def getTopHits():
     data={}
     with open('hits','r') as f:
         data=json.loads(f.read())
-    if(data['time']-time.time()*1000<86400000):
-        print("YAY")
+    print (data['time']-time.time()*1000)
+    if(time.time()*1000-data['time']<86400000):
         return JsonToSongs(data['data'])
     songArray=[]
     page=requests.get(url,headers=header)
