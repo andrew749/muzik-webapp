@@ -13,8 +13,10 @@ import DownloadNL
 import YouTube
 import mp3raid
 import time
+import _thread
 header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0',}
 savedSearches=[]
+#topHits=[]
 app=Flask(__name__)
 #Seaches the site and returns an array of linksmum
 #TODO implement groove shark
@@ -36,7 +38,6 @@ def getTopHits():
     data={}
     with open('hits','r') as f:
         data=json.loads(f.read())
-    print (data['time']-time.time()*1000)
     if(time.time()*1000-data['time']<86400000):
         return JsonToSongs(data['data'])
     songArray=[]
@@ -49,8 +50,8 @@ def getTopHits():
         songArray.append(s)
     f=open('hits','w')
     json.dump({'time':int(time.time()*1000),'data':allSongsToJson(songArray)},f)
+    topHits=songArray
     return songArray
-
 @app.route('/top')
 def getTop():
     elements=getTopHits()
@@ -68,10 +69,13 @@ def serveGUI():
 @app.route('/search')
 def searchForSongs():
     name = request.args.get('songname')
+    return search(name)
+def search(name):
     name.replace("'","\'");
     links=[]
     for x in savedSearches:
         if(x.name==name):
+            print("getting cached result")
             return allSongsToJson(x.songs)
     links_mp3skull=mp3skull.searchMP3Skull(name)
     links_downloadnl=DownloadNL.searchDownloadNL(name)
@@ -86,9 +90,23 @@ def searchForSongs():
         links_youtube=YouTube.searchYouTube(name)
         links+=links_youtube
     savedSearches.append(SearchResult(name,links))
+    print ("done searching for ",name)
     return (allSongsToJson(links))
 
-if __name__ == '__main__':
-    app.run(debug=True)
+#download data for all of the sources
 
+def initialize():
+    topHits=getTopHits()
+    i=0
+    for x in topHits:
+        print("Searching for ",x.title)
+        #_thread.start_new_thread(search,(x.title,))
+        search(x.title+" "+x.artist)
+        if i==10:
+            break
+        else:
+            i+=1
+if __name__ == '__main__':
+    _thread.start_new_thread(initialize,())
+    app.run(debug=True)
 
