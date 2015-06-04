@@ -14,6 +14,7 @@ import YouTube
 import mp3raid
 import time
 header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0',}
+savedSearches=[]
 app=Flask(__name__)
 #Seaches the site and returns an array of linksmum
 #TODO implement groove shark
@@ -22,8 +23,10 @@ app=Flask(__name__)
 #method to search local datastore and see if there is a verified link
 def getVerifiedLinks(songName):
     return False;
-def followTrendingMP3Link(url):
-    return None
+class SearchResult:
+    def __init__(self, name="unknown",songs=None):
+        self.name=name
+        self.songs=songs
 """
 This function get the top 100 list from iTunes.
 """
@@ -67,6 +70,9 @@ def searchForSongs():
     name = request.args.get('songname')
     name.replace("'","\'");
     links=[]
+    for x in savedSearches:
+        if(x.name==name):
+            return allSongsToJson(x.songs)
     links_mp3skull=mp3skull.searchMP3Skull(name)
     links_downloadnl=DownloadNL.searchDownloadNL(name)
     links_mp3raid=mp3raid.getMP3RaidSongs(name)
@@ -79,6 +85,7 @@ def searchForSongs():
     if(links is None):
         links_youtube=YouTube.searchYouTube(name)
         links+=links_youtube
+    savedSearches.append(SearchResult(name,links))
     return (allSongsToJson(links))
 
 if __name__ == '__main__':

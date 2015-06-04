@@ -23,4 +23,4 @@ def searchMP3Skull(songName):
         s=Song(names[x],songs[x])
         songArray.append(s)
         i+=1
-        return (songArray)
+    return (songArray)
