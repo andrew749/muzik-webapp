@@ -12,6 +12,7 @@ import mp3skull
 import DownloadNL
 import YouTube
 import mp3raid
+import time
 header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0',}
 app=Flask(__name__)
 #Seaches the site and returns an array of linksmum
@@ -29,6 +30,12 @@ This function get the top 100 list from iTunes.
 def getTopHits():
     url="https://itunes.apple.com/us/rss/topsongs/limit=100/xml"
     namespaces={'im':'http://itunes.apple.com/rss','xmlns':"http://www.w3.org/2005/Atom"}
+    data={}
+    with open('hits','r') as f:
+        data=json.loads(f.read())
+    if(data['time']-time.time()*1000<100000):
+        print("YAY")
+        return JsonToSongs(data['data'])
     songArray=[]
     page=requests.get(url,headers=header)
     tree=etree.fromstring(page.content)
@@ -37,6 +44,8 @@ def getTopHits():
         s.setArtist(x.find('im:artist',namespaces).text)
         s.setAlbumArtURL(x.find('im:image[@height="170"]',namespaces).text)
         songArray.append(s)
+    f=open('hits','w')
+    json.dump({'time':int(time.time()*1000),'data':allSongsToJson(songArray)},f)
     return songArray
 
 @app.route('/top')

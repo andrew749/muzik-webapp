@@ -30,3 +30,10 @@ class Song:
         self.album=album
 def allSongsToJson(songs):
     return json.dumps([x.songToJson()for x in songs],indent=4)
+def JsonToSongs(j):
+    songArray=[]
+    for x in json.loads(j):
+        s=Song(x['title'],x['url'],x['artist'],x['albumArt'],x['album'])
+        songArray.append(s)
+    return songArray
+
