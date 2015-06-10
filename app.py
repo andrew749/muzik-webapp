@@ -36,10 +36,13 @@ def getTopHits():
     url="https://itunes.apple.com/us/rss/topsongs/limit=100/xml"
     namespaces={'im':'http://itunes.apple.com/rss','xmlns':"http://www.w3.org/2005/Atom"}
     data={}
-    with open('hits','r') as f:
-        data=json.loads(f.read())
-    if(time.time()*1000-data['time']<86400000):
-        return JsonToSongs(data['data'])
+    try:
+        with open('hits','r') as f:
+            data=json.loads(f.read())
+        if(time.time()*1000-data['time']<86400000):
+            return JsonToSongs(data['data'])
+    except Exception:
+        pass
     songArray=[]
     page=requests.get(url,headers=header)
     tree=etree.fromstring(page.content)
@@ -92,7 +95,9 @@ def search(name):
     savedSearches.append(SearchResult(name,links))
     print ("done searching for ",name)
     return (allSongsToJson(links))
-
+@app.route('/callback')
+def handleCallback():
+    pdb.set_trace()
 #download data for all of the sources
 
 def initialize():
