@@ -17,7 +17,7 @@ import _thread
 header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0',}
 savedSearches=[]
 #topHits=[]
-app=Flask(__name__)
+application=Flask(__name__)
 #Seaches the site and returns an array of linksmum
 #TODO implement groove shark
 #TODO implement goear
@@ -55,21 +55,21 @@ def getTopHits():
     json.dump({'time':int(time.time()*1000),'data':allSongsToJson(songArray)},f)
     topHits=songArray
     return songArray
-@app.route('/top')
+@application.route('/top')
 def getTop():
     elements=getTopHits()
     return (allSongsToJson(elements))
 
-@app.route('/landing')
+@application.route('/landing')
 def serveLanding():
     return render_template('landingpage.html')
 
-@app.route('/')
+@application.route('/')
 def serveGUI():
     elements=getTopHits()
     return render_template('index.html',elements=elements)
 
-@app.route('/search')
+@application.route('/search')
 def searchForSongs():
     name = request.args.get('songname')
     return search(name)
@@ -95,7 +95,7 @@ def search(name):
     savedSearches.append(SearchResult(name,links))
     print ("done searching for ",name)
     return (allSongsToJson(links))
-@app.route('/callback')
+@application.route('/callback')
 def handleCallback():
     pdb.set_trace()
 #download data for all of the sources
@@ -113,5 +113,5 @@ def initialize():
             i+=1
 if __name__ == '__main__':
     _thread.start_new_thread(initialize,())
-    app.run(debug=True)
+    application.run(debug=True)
 
