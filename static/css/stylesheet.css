@@ -44,7 +44,15 @@
     min-height:20vh;
     border-radius: .5em;
     background-color: #fff;
-
+}
+.result-element{
+    display: flex;
+    align-items: center;
+        padding: 20px;
+}
+.vertical-center{
+    display: table-cell;
+    vertical-align: middle;
 }
 .element:hover{
     box-shadow:1px 1px 1px #000;

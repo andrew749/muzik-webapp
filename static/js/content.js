@@ -108,7 +108,7 @@ function getSongs(songName){
       songArray=[];
       for (var x in data){
         var element=$("<div/>").addClass("outerelement col-md-2");
-        var innerelement=$("<div/>").addClass("element").attr('id',x);
+        var innerelement=$("<div/>").addClass("element result-element").attr('id',x);
         var title=$("<h4/>").text(data[x].title);
         element.append(innerelement);
         innerelement.append(title);
