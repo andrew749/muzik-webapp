@@ -5,9 +5,7 @@ import Song
 conn=sqlite3.connect('muzik.db')
 conn.row_factory=sqlite3.Row
 cursor=conn.cursor()
-
-def createTable():
-    cursor.execute('CREATE TABLE IF NOT EXISTS entries (title text unique,url text, artist text, albumArtUrl text, verified integer)')
+cursor.execute('CREATE TABLE IF NOT EXISTS entries (title text unique,url text, artist text, albumArtUrl text, verified integer)')
 
 
 """Creates a song Entry in the main table"""
@@ -42,10 +40,3 @@ def printTables(name):
 def closeConnection():
     conn.close()
     
-#createTable()
-#addSong("Hooked","Blue Swede","someurl")
-#for x in range(0,10):
-#    addSongResult("Hooked","blue")
-a=getSongEntries("Hooked")
-print(a.songToJson())
-closeConnection()
