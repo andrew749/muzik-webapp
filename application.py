@@ -78,11 +78,11 @@ def search(name):
     x=dbmanager.getSongEntries(name)
     if(x is not None):
         print("getting cached results Database")
-        return allSongsToJson(x.songs)
-    for x in savedSearches:
-        if(x.name==name):
-            print("getting cached result")
-            return allSongsToJson(x.songs)
+        return json.dumps([Song(x.title,y,x.artist,x.albumArt,x.album).songToJson() for y in x.url],indent=4)
+#    for x in savedSearches:
+#        if(x.name==name):
+#            print("getting cached result")
+#            return allSongsToJson(x.songs)
     links_mp3skull=mp3skull.searchMP3Skull(name)
     links_downloadnl=DownloadNL.searchDownloadNL(name)
     links_mp3raid=mp3raid.getMP3RaidSongs(name)
@@ -97,8 +97,8 @@ def search(name):
         links+=links_youtube
     dbmanager.addSong(name,"Unknown Artist","")
     for y in links:
-        dbmanager.addSongResult(name,y.url)
-    savedSearches.append(SearchResult(name,links))
+        dbmanager.addSongResult(name,y.url[0])
+#    savedSearches.append(SearchResult(name,links))
     print ("done searching for ",name)
     return (allSongsToJson(links))
 @application.route('/callback')
