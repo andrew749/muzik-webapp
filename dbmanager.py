@@ -2,7 +2,7 @@ import sqlite3
 import pdb
 import json
 import Song
-conn=sqlite3.connect('muzik.db')
+conn=sqlite3.connect('muzik.db',check_same_thread=False)
 conn.row_factory=sqlite3.Row
 cursor=conn.cursor()
 cursor.execute('CREATE TABLE IF NOT EXISTS entries (title text unique,url text, artist text, albumArtUrl text, verified integer)')
@@ -26,11 +26,18 @@ def addSongResult(name,url):
 def getSongEntries(name):
     cursor.execute('SELECT * FROM entries WHERE title=?',[name])    
     song=cursor.fetchone()
+    if song is None:
+        return None
     s=Song.Song(name,[],song[2],song[3],song[4])
+    flag=0
     for x in json.loads(song[1]):
+        flag=1
         s.addURL(x)
-    return s
-        
+    if(flag == 1):
+        return s
+    else:
+        return None
+    
 def printTables(name):
     print("Main Table")
     for row in cursor.execute("SELECT * FROM entries"):

@@ -14,17 +14,16 @@ import YouTube
 import mp3raid
 import time
 import _thread
+import dbmanager
+
 header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0',}
 savedSearches=[]
 #topHits=[]
 application=Flask(__name__)
 #Seaches the site and returns an array of linksmum
-#TODO implement groove shark
-#TODO implement goear
-#TODO implement yourlisten
+
 #method to search local datastore and see if there is a verified link
-def getVerifiedLinks(songName):
-    return False;
+
 class SearchResult:
     def __init__(self, name="unknown",songs=None):
         self.name=name
@@ -76,6 +75,10 @@ def searchForSongs():
 def search(name):
     name.replace("'","\'");
     links=[]
+    x=dbmanager.getSongEntries(name)
+    if(x is not None):
+        print("getting cached results Database")
+        return allSongsToJson(x.songs)
     for x in savedSearches:
         if(x.name==name):
             print("getting cached result")
@@ -92,6 +95,9 @@ def search(name):
     if(links is None):
         links_youtube=YouTube.searchYouTube(name)
         links+=links_youtube
+    dbmanager.addSong(name,"Unknown Artist","")
+    for y in links:
+        dbmanager.addSongResult(name,y.url)
     savedSearches.append(SearchResult(name,links))
     print ("done searching for ",name)
     return (allSongsToJson(links))
