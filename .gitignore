@@ -1,7 +1,7 @@
 hits
 bin
 lib
-
+muzik.db
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
