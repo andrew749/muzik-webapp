@@ -17,17 +17,11 @@ import _thread
 import dbmanager
 
 header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0',}
-savedSearches=[]
-#topHits=[]
+
+
 application=Flask(__name__)
-#Seaches the site and returns an array of linksmum
 
-#method to search local datastore and see if there is a verified link
 
-class SearchResult:
-    def __init__(self, name="unknown",songs=None):
-        self.name=name
-        self.songs=songs
 """
 This function get the top 100 list from iTunes.
 """
@@ -54,6 +48,7 @@ def getTopHits():
     json.dump({'time':int(time.time()*1000),'data':allSongsToJson(songArray)},f)
     topHits=songArray
     return songArray
+
 @application.route('/top')
 def getTop():
     elements=getTopHits()
@@ -72,17 +67,9 @@ def serveGUI():
 def searchForSongs():
     name = request.args.get('songname')
     return search(name)
-def search(name):
-    name.replace("'","\'");
+
+def getResults(name):
     links=[]
-    x=dbmanager.getSongEntries(name)
-    if(x is not None):
-        print("getting cached results Database")
-        return json.dumps([Song(x.title,y,x.artist,x.albumArt,x.album).songToJson() for y in x.url],indent=4)
-#    for x in savedSearches:
-#        if(x.name==name):
-#            print("getting cached result")
-#            return allSongsToJson(x.songs)
     links_mp3skull=mp3skull.searchMP3Skull(name)
     links_downloadnl=DownloadNL.searchDownloadNL(name)
     links_mp3raid=mp3raid.getMP3RaidSongs(name)
@@ -95,15 +82,29 @@ def search(name):
     if(links is None):
         links_youtube=YouTube.searchYouTube(name)
         links+=links_youtube
+    return links
+
+
+def search(name):
+    name.replace("'","\'");
+    x=dbmanager.getSongEntries(name)
+    if(x is not None):
+        print("getting cached results Database")
+        s=json.dumps(Song(name,x.url,x.artist,x.albumArt,x.album).songToJson(),indent=4)
+        return s
+    links=getResults(name)
     dbmanager.addSong(name,"Unknown Artist","")
-    for y in links:
-        dbmanager.addSongResult(name,y.url[0])
-#    savedSearches.append(SearchResult(name,links))
+    for y in links[0]:
+        dbmanager.addSongResult(name,y,links[0][y])
     print ("done searching for ",name)
-    return (allSongsToJson(links))
+    return json.dumps(Song(name,links,"Unknown Artist","","").songToJson(),indent=4)
+
+
 @application.route('/callback')
 def handleCallback():
     pdb.set_trace()
+    
+    
 #download data for all of the sources
 
 def initialize():
@@ -111,7 +112,6 @@ def initialize():
     i=0
     for x in topHits:
         print("Searching for ",x.title)
-        #_thread.start_new_thread(search,(x.title,))
         search(x.title+" "+x.artist)
         if i==10:
             break

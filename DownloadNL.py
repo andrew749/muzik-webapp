@@ -23,7 +23,7 @@ def searchDownloadNL(songName):
         for i in songText:
             name+=i
         #print(name, songLink)
-        s=Song(name,"http://www.downloads.nl"+songLink[0])
+        s={name:"http://www.downloads.nl"+songLink[0]}
         songArray.append(s)
     return songArray
 

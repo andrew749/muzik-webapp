@@ -14,12 +14,12 @@ def addSong(title,artist,albumArtUrl):
     conn.commit()
     
 """Adds a song result. assuming song object is created"""
-def addSongResult(name,url):
+def addSongResult(name,title,url):
     cursor.execute('SELECT * FROM entries WHERE title=?',[name])
     row=cursor.fetchone()
-    array=json.loads(row[1])
-    array.append(url)
-    cursor.execute('UPDATE entries SET url=? WHERE title=? ',[json.dumps(array),name])
+    data=json.loads(row[1])
+    data.append({title:url})
+    cursor.execute('UPDATE entries SET url=? WHERE title=? ',[json.dumps(data),name])
     conn.commit()
     
 """Get all the entries of a particular song"""
@@ -28,11 +28,12 @@ def getSongEntries(name):
     song=cursor.fetchone()
     if song is None:
         return None
-    s=Song.Song(name,[],song[2],song[3],song[4])
+    s=Song.Song(name,None,song[2],song[3],song[4])
     flag=0
     for x in json.loads(song[1]):
         flag=1
-        s.addURL(x)
+        for (k,v) in x.items():
+            s.addURL(k,v)
     if(flag == 1):
         return s
     else:

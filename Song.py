@@ -17,8 +17,8 @@ class Song:
         return {"title":self.title,"url":self.url,"albumArt":self.albumArt,"artist":self.artist,"album":self.album,"verified":self.verified}
     def setAlbumArtURL(self, albumArtUrl):
         self.albumArt=albumArtUrl
-    def addURL(self,url):
-        self.url.append(url)
+    def addURL(self,songtitle,url):
+        self.url.append({songtitle:url})
     def setArtist(self, artist):
         self.artist=artist
 #condition should be true or false
@@ -28,8 +28,10 @@ class Song:
         self.url.pop(position)
     def setAlbum(self,album):
         self.album=album
-def allSongsToJson(songs):
-    return json.dumps([x.songToJson()for x in songs],indent=4)
+def allSongsToJson(title,songs,artist,albumArt,album):
+    s=Song(title,None,artist,albumArt,album)
+    s.url=songs
+    return json.dumps(s.songToJson(),indent=4)
 def JsonToSongs(j):
     songArray=[]
     for x in json.loads(j):

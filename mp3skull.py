@@ -20,7 +20,6 @@ def searchMP3Skull(songName):
     for x in range(len(songs)):
         if(i>30):
             break
-        s=Song(names[x],songs[x])
-        songArray.append(s)
+        songArray.append({names[x]:songs[x]})
         i+=1
     return (songArray)
