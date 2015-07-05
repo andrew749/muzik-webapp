@@ -106,12 +106,12 @@ function getSongs(songName){
             stopLoadingDialog();
             data=JSON.parse(data);
             songArray=[];
-            for (var y in data.url[0]){
-                var x=data.url[0][y];
+            for (var y in data.url){
+                var x=data.url[y];
                 if(x!=null){
                     var element=$("<div/>").addClass("outerelement col-md-2");
                     var innerelement=$("<div/>").addClass("element result-element").attr('id',y);
-                     var key=Object.keys(x)[0];
+                     var key=Object.keys(x);
                     var title=$("<h4/>").text(key);
                     element.append(innerelement);
                     innerelement.append(title);

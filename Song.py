@@ -9,7 +9,7 @@ class Song:
     def __init__(self,title, url=None,artist="Unknown Artist",albumArtUrl=None,album="Unkown Album"):
         self.verified=False
         self.title=title
-        self.url=[url]
+        self.url=url
         self.artist=artist
         self.albumArt=albumArtUrl
         self.album=album
@@ -18,6 +18,8 @@ class Song:
     def setAlbumArtURL(self, albumArtUrl):
         self.albumArt=albumArtUrl
     def addURL(self,songtitle,url):
+        if self.url is None:
+            self.url=[]
         self.url.append({songtitle:url})
     def setArtist(self, artist):
         self.artist=artist
