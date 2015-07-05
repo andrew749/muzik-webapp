@@ -22,4 +22,4 @@ verified:"whether or not the song has a verified link"
 ```
 <h3>Reporting Issues</h3>
 To report any api issues, email me at andrewcod749@gmail.com
- Live @ muzik-api.herokuapp.com
+ Live @ muzik-api.herokuapp.com and muzik.elasticbeanstalk.com
