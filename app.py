@@ -19,7 +19,7 @@ import dbmanager
 header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0',}
 
 
-application=Flask(__name__)
+app=Flask(__name__)
 
 
 """
@@ -49,21 +49,21 @@ def getTopHits():
     topHits=songArray
     return songArray
 
-@application.route('/top')
+@app.route('/top')
 def getTop():
     elements=getTopHits()
     return (allSongsToJson(elements))
 
-@application.route('/landing')
+@app.route('/landing')
 def serveLanding():
     return render_template('landingpage.html')
 
-@application.route('/')
+@app.route('/')
 def serveGUI():
     elements=getTopHits()
     return render_template('index.html',elements=elements)
 
-@application.route('/search')
+@app.route('/search')
 def searchForSongs():
     name = request.args.get('songname')
     return search(name)
@@ -100,11 +100,11 @@ def search(name):
     return json.dumps(Song(name,links,"Unknown Artist","","").songToJson(),indent=4)
 
 
-@application.route('/callback')
+@app.route('/callback')
 def handleCallback():
     pdb.set_trace()
-    
-    
+
+
 #download data for all of the sources
 
 def initialize():
@@ -119,5 +119,4 @@ def initialize():
             i+=1
 if __name__ == '__main__':
     _thread.start_new_thread(initialize,())
-    application.run(debug=True)
-
+    app.run(debug=True)

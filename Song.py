@@ -28,14 +28,11 @@ class Song:
         self.url.pop(position)
     def setAlbum(self,album):
         self.album=album
-def allSongsToJson(title,songs,artist,albumArt,album):
-    s=Song(title,None,artist,albumArt,album)
-    s.url=songs
-    return json.dumps(s.songToJson(),indent=4)
+def allSongsToJson(songs):
+    return json.dumps([x.songToJson()for x in songs],indent=4)
 def JsonToSongs(j):
     songArray=[]
     for x in json.loads(j):
         s=Song(x['title'],x['url'],x['artist'],x['albumArt'],x['album'])
         songArray.append(s)
     return songArray
-
