@@ -16,6 +16,8 @@ import time
 import _thread
 import dbmanager
 
+topHits=[]
+
 header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0',}
 
 
@@ -94,8 +96,9 @@ def search(name):
         return s
     links=getResults(name)
     dbmanager.addSong(name,"Unknown Artist","")
-    for y in links[0]:
-        dbmanager.addSongResult(name,y,links[0][y])
+    for y in links:
+        for (k,v) in y.items():
+            dbmanager.addSongResult(name,k,v)
     print ("done searching for ",name)
     return json.dumps(Song(name,links,"Unknown Artist","","").songToJson(),indent=4)
 
