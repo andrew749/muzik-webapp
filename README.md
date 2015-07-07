@@ -1,7 +1,7 @@
-<h1>Play-webapp</h1>
+<h1>Muzik-webapp</h1>
 
 <h2>A website that streams free music from a variety of sources.</h2>
-Currently play is DMCA compliant. If for any change your conntent appears without consent, informme and I will take it down immediately.
+Currently muzik is DMCA compliant. If for any change your conntent appears without consent, informme and I will take it down immediately.
 <h3>API Usage
 </h3>
 <h4>Query</h4>
