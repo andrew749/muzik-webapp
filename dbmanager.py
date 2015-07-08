@@ -3,7 +3,7 @@ import pdb
 import json
 import Song
 import os
-conn=pymysql.connect(host=os.environ['RDS_HOSTNAME']+":"+os.environ['RDS_PORT'],user=os.environ['RDS_USERNAME'],passwd=os.environ['RDS_PASSWORD'],db=os.environ['RDS_DB_NAME'])
+conn=pymysql.connect(host=os.environ['RDS_HOSTNAME'],port=os.environ['RDS_PORT'],user=os.environ['RDS_USERNAME'],passwd=os.environ['RDS_PASSWORD'],db=os.environ['RDS_DB_NAME'])
 bcursor=conn.cursor()
 cursor.execute('CREATE TABLE IF NOT EXISTS entries (title text unique,url text, artist text, albumArtUrl text, verified integer)')
 
