@@ -5,7 +5,7 @@ import Song
 import os
 conn=pymysql.connect(host=os.environ['RDS_HOSTNAME'],port=int(os.environ['RDS_PORT']),user=os.environ['RDS_USERNAME'],passwd=os.environ['RDS_PASSWORD'],db=os.environ['RDS_DB_NAME'])
 cursor=conn.cursor()
-cursor.execute('CREATE TABLE IF NOT EXISTS entries (title text unique,url text, artist text, albumArtUrl text, verified integer)')
+cursor.execute('CREATE TABLE IF NOT EXISTS entries (title TINYTEXT unique,url MEDIUMTEXT, artist TINYTEXT, albumArtUrl TINYTEXT, verified integer)')
 
 
 """Creates a song Entry in the main table"""
