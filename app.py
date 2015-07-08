@@ -48,7 +48,6 @@ def getTopHits():
         songArray.append(s)
     f=open('hits','w')
     json.dump({'time':int(time.time()*1000),'data':allSongsToJson(songArray)},f)
-    topHits=songArray
     return songArray
 
 @app.route('/top')
@@ -111,15 +110,18 @@ def handleCallback():
 #download data for all of the sources
 
 def initialize():
+    print ("Initializing top hit search sequence")
     topHits=getTopHits()
     i=0
     for x in topHits:
+        print("\n\n\n\n\n\n\n\n\n")
         print("Searching for ",x.title)
         search(x.title+" "+x.artist)
         if i==10:
             break
         else:
             i+=1
+_thread.start_new_thread(initialize,())
+
 if __name__ == '__main__':
-    _thread.start_new_thread(initialize,())
     app.run(debug=True)
