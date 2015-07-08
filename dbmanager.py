@@ -1,9 +1,9 @@
-import mysql
+import pymysql
 import pdb
 import json
 import Song
 import os
-conn=mysql.connect(host=os.environ['RDS_DB_NAME']+":"+os.environ['RDS_PORT'],user=os.environ['RDS_USERNAME'],passwd=os.environ['RDS_PASSWORD'],db="Muzik")
+conn=pymysql.connect(host=os.environ['RDS_DB_NAME']+":"+os.environ['RDS_PORT'],user=os.environ['RDS_USERNAME'],passwd=os.environ['RDS_PASSWORD'],db="Muzik")
 bcursor=conn.cursor()
 cursor.execute('CREATE TABLE IF NOT EXISTS entries (title text unique,url text, artist text, albumArtUrl text, verified integer)')
 
