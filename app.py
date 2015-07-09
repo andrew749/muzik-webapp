@@ -117,7 +117,7 @@ def initialize():
         print("\n\n\n\n\n\n\n\n\n")
         print("Searching for ",x.title)
         search(x.title+" "+x.artist)
-        if i==10:
+        if i==20:
             break
         else:
             i+=1
