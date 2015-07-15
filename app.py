@@ -114,7 +114,6 @@ def initialize():
     topHits=getTopHits()
     i=0
     for x in topHits:
-        print("\n\n\n\n\n\n\n\n\n")
         print("Searching for ",x.title)
         search(x.title+" "+x.artist)
         if i==20:
