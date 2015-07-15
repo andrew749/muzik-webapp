@@ -17,7 +17,7 @@ def addSong(title,artist,albumArtUrl):
     cursor=instance[1]
     cursor.execute("""INSERT IGNORE INTO entries (`songtitle`, `url`, `artist`, `albumArtUrl`, `verified`) VALUES(%s,'[]',%s,%s,0)""",[conn.escape_string(title),artist,conn.escape_string(albumArtUrl)])
     conn.commit()
-    closeConnection()
+    closeConnection(conn)
 
 """Adds a song result. assuming song object is created"""
 def addSongResult(name,title,url):
@@ -30,7 +30,7 @@ def addSongResult(name,title,url):
     data.append({title:url})
     cursor.execute("""UPDATE entries SET url=%s WHERE songtitle=%s """,[json.dumps(data),conn.escape_string(name)])
     conn.commit()
-    closeConnection()
+    closeConnection(conn)
 
 """Get all the entries of a particular song"""
 def getSongEntries(name):
@@ -51,7 +51,7 @@ def getSongEntries(name):
         return s
     else:
         return None
-    closeConnection()
+    closeConnection(conn)
 
 def printTables(name):
     instance=connect()
@@ -60,8 +60,8 @@ def printTables(name):
     print("Main Table")
     for row in cursor.execute("SELECT * FROM entries"):
         print(row)
-    closeConnection()
+    closeConnection(conn)
 
 
-def closeConnection():
+def closeConnection(conn):
     conn.close()
