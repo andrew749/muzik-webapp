@@ -35,6 +35,7 @@ def getTopHits():
         with open('hits','r') as f:
             data=json.loads(f.read())
         if(time.time()*1000-data['time']<86400000):
+            runTopHitCachingAsync()
             return JsonToSongs(data['data'])
     except Exception:
         pass
@@ -106,11 +107,7 @@ def search(name):
 def handleCallback():
     pdb.set_trace()
 
-
-#download data for all of the sources
-
-def initialize():
-    print ("Initializing top hit search sequence")
+def cacheTopHitResults():
     topHits=getTopHits()
     i=0
     for x in topHits:
@@ -120,7 +117,10 @@ def initialize():
             break
         else:
             i+=1
-_thread.start_new_thread(initialize,())
 
+def runTopHitCachingAsync():
+    _thread.start_new_thread(cacheTopHitResults,())
+
+runTopHitCachingAsync()
 if __name__ == '__main__':
     app.run(debug=True)
