@@ -22,7 +22,6 @@ header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) G
 
 
 application=Flask(__name__)
-app=application
 
 """
 This function get the top 100 list from iTunes.
@@ -51,21 +50,21 @@ def getTopHits():
     json.dump({'time':int(time.time()*1000),'data':allSongsToJson(songArray)},f)
     return songArray
 
-@app.route('/top')
+@application.route('/top')
 def getTop():
     elements=getTopHits()
     return (allSongsToJson(elements))
 
-@app.route('/landing')
+@application.route('/landing')
 def serveLanding():
     return render_template('landingpage.html')
 
-@app.route('/')
+@application.route('/')
 def serveGUI():
     elements=getTopHits()
     return render_template('index.html',elements=elements)
 
-@app.route('/search')
+@application.route('/search')
 def searchForSongs():
     name = request.args.get('songname')
     return search(name)
@@ -103,7 +102,7 @@ def search(name):
     return json.dumps(Song(name,links,"Unknown Artist","","").songToJson(),indent=4)
 
 
-@app.route('/callback')
+@application.route('/callback')
 def handleCallback():
     pdb.set_trace()
 
