@@ -34,7 +34,7 @@ def getTopHits():
         with open('hits','r') as f:
             data=json.loads(f.read())
         if(time.time()*1000-data['time']<86400000):
-            runTopHitCachingAsync()
+            cacheTopHitResults()
             return JsonToSongs(data['data'])
     except Exception:
         pass
@@ -119,7 +119,7 @@ def cacheTopHitResults():
 
 def runTopHitCachingAsync():
     _thread.start_new_thread(cacheTopHitResults,())
-
+cacheTopHitResults()
 runTopHitCachingAsync()
 if __name__ == '__main__':
     application.run(debug=True)
