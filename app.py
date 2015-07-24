@@ -17,7 +17,6 @@ import _thread
 import dbmanager
 
 topHits=[]
-
 header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0',}
 
 
@@ -32,9 +31,8 @@ def getTopHits():
     data={}
     try:
         with open('hits','r') as f:
-            data=json.loads(f.read())
+            data = json.loads(f.read())
         if(time.time()*1000-data['time']<86400000):
-            cacheTopHitResults()
             return JsonToSongs(data['data'])
     except Exception:
         pass
@@ -48,6 +46,7 @@ def getTopHits():
         songArray.append(s)
     f=open('hits','w')
     json.dump({'time':int(time.time()*1000),'data':allSongsToJson(songArray)},f)
+    topHits = songArray
     return songArray
 
 @application.route('/top')
@@ -107,7 +106,7 @@ def handleCallback():
     pdb.set_trace()
 
 def cacheTopHitResults():
-    topHits=getTopHits()
+    isRunningTopHitCaching = True
     i=0
     for x in topHits:
         print("Searching for ",x.title)
@@ -116,10 +115,16 @@ def cacheTopHitResults():
             break
         else:
             i+=1
+    isRunningTopHitCaching = False
 
 def runTopHitCachingAsync():
     _thread.start_new_thread(cacheTopHitResults,())
-cacheTopHitResults()
-runTopHitCachingAsync()
+
+def initialize():
+    getTopHits()
+    runTopHitCachingAsync()
+
+initialize()
+
 if __name__ == '__main__':
     application.run(debug=True)
