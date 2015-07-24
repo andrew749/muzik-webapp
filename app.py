@@ -29,6 +29,8 @@ def getTopHits():
     url="https://itunes.apple.com/us/rss/topsongs/limit=100/xml"
     namespaces={'im':'http://itunes.apple.com/rss','xmlns':"http://www.w3.org/2005/Atom"}
     data={}
+
+    #Checks for a temp file with the top hit information
     try:
         with open('hits','r') as f:
             data = json.loads(f.read())
@@ -36,6 +38,7 @@ def getTopHits():
             return JsonToSongs(data['data'])
     except Exception:
         pass
+
     songArray=[]
     page=requests.get(url,headers=header)
     tree=etree.fromstring(page.content)
