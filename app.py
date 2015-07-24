@@ -124,9 +124,9 @@ def cacheTopHitResults():
 def runTopHitCachingAsync():
     _thread.start_new_thread(cacheTopHitResults,())
 
-#runTopHitCachingAsync()
+runTopHitCachingAsync()
 
-cacheTopHitResults()
+#cacheTopHitResults()
 
 if __name__ == '__main__':
     application.run(debug=True)
