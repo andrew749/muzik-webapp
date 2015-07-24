@@ -16,7 +16,6 @@ import time
 import _thread
 import dbmanager
 
-topHits=[]
 header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0',}
 
 
@@ -38,10 +37,12 @@ def getTopHits():
             return JsonToSongs(data['data'])
     except Exception:
         pass
-
+    #Get the data from the apple
     songArray=[]
     page=requests.get(url,headers=header)
     tree=etree.fromstring(page.content)
+
+    #Parse all of the results
     for x in tree.findall('xmlns:entry',namespaces):
         s=Song(x.find('im:name',namespaces).text)
         s.setArtist(x.find('im:artist',namespaces).text)
@@ -49,7 +50,6 @@ def getTopHits():
         songArray.append(s)
     f=open('hits','w')
     json.dump({'time':int(time.time()*1000),'data':allSongsToJson(songArray)},f)
-    topHits = songArray
     return songArray
 
 @application.route('/top')
@@ -89,11 +89,12 @@ def getResults(name):
 
 
 def search(name):
+    #escape character incase of bad stuff
     name.replace("'","\'");
-    x=dbmanager.getSongEntries(name)
+    x = dbmanager.getSongEntries(name)
     if(x is not None):
         print("getting cached results Database")
-        s=json.dumps(Song(name,x.url,x.artist,x.albumArt,x.album).songToJson(),indent=4)
+        s = json.dumps(Song(name,x.url,x.artist,x.albumArt,x.album).songToJson(),indent=4)
         return s
     links=getResults(name)
     dbmanager.addSong(name,"Unknown Artist","")
@@ -109,25 +110,23 @@ def handleCallback():
     pdb.set_trace()
 
 def cacheTopHitResults():
-    isRunningTopHitCaching = True
+    topHits = getTopHits()
     i=0
     for x in topHits:
+        pdb.set_trace()
         print("Searching for ",x.title)
         search(x.title+" "+x.artist)
         if i==20:
             break
         else:
             i+=1
-    isRunningTopHitCaching = False
 
 def runTopHitCachingAsync():
     _thread.start_new_thread(cacheTopHitResults,())
 
-def initialize():
-    getTopHits()
-    runTopHitCachingAsync()
+#runTopHitCachingAsync()
 
-initialize()
+cacheTopHitResults()
 
 if __name__ == '__main__':
     application.run(debug=True)
