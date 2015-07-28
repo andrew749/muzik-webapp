@@ -8,7 +8,7 @@ from Song import *
 from urllib.parse import quote
 import pdb
 from urllib.request import urlopen,Request
-url="http://www.mp3raid.ws/download/"
+url="http://www.mp3raid.ca/download/"
 header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0',}
 def getMP3RaidSongs(songName):
     end=songName.replace(" ","_")+".html"
@@ -18,7 +18,7 @@ def getMP3RaidSongs(songName):
     elements=tree.xpath("//*[@class='index1']//a[@class='dl']")
     songArray=[]
     for song in elements:
-        nexturl="http://www.mp3raid.ws/search/ddl/"+song.xpath("@id")[0]+"/"+end
+        nexturl="http://www.mp3raid.ca/search/ddl/"+song.xpath("@id")[0]+"/"+end
         page2=requests.get(nexturl,headers=header)
         tree2=html.fromstring(page2.text)
         songName=tree2.xpath("//table/tr/*[2]/text()")[0]
