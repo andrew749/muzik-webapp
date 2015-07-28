@@ -1,6 +1,0 @@
-FROM debian
-MAINTAINER Andrew Codispoti
-
-RUN apt-get update && apt-get install -y libxml2-dev python3-pip libxslt-dev zlib1g-dev
-ADD requirements.txt /srv/requirements.txt
-RUN pip3 install -r /srv/requirements.txt

@@ -1,5 +1,14 @@
-FROM muzik-env
+FROM debian
 MAINTAINER Andrew Codispoti
+
+RUN apt-get update && apt-get install -y libxml2-dev python3-pip libxslt-dev zlib1g-dev
+ADD requirements.txt /srv/requirements.txt
+
+RUN pip3 install  flask
+RUN pip3 install  jinja2
+RUN pip3 install  lxml
+RUN pip3 install  pymysql
+RUN pip3 install  python-dateutil
 
 ADD . /srv
 
