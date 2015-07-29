@@ -12,12 +12,12 @@ RUN pip3 install  python-dateutil
 
 ADD . /srv
 
-ENV RDS_HOSTNAME=aa8um8jl3fn77x.ccychmdd3oxe.us-east-1.rds.amazonaws.com
+ENV RDS_HOSTNAME=muzik.ccychmdd3oxe.us-east-1.rds.amazonaws.com
 ENV RDS_PORT=3306
-ENV RDS_USERNAME=test
-ENV RDS_PASSWORD=test
+ENV RDS_USERNAME=
+ENV RDS_PASSWORD=
 ENV RDS_DB_NAME=Muzik
 
-EXPOSE 80
+EXPOSE 5000
 
 CMD python3 /srv/app.py

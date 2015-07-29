@@ -113,7 +113,7 @@ def cacheTopHitResults():
     topHits = getTopHits()
     i=0
     for x in topHits:
-        print("Searching for ",x.title)
+        print("Searching for ",x.title.encode('utf-8'))
         search(x.title+" "+x.artist)
         if i==20:
             break
