@@ -113,7 +113,7 @@ def cacheTopHitResults():
     topHits = getTopHits()
     i=0
     for x in topHits:
-        print("Searching for ",x.title)
+        print("Searching for ",x.title.encode('utf-8'))
         search(x.title+" "+x.artist)
         if i==20:
             break
@@ -123,9 +123,9 @@ def cacheTopHitResults():
 def runTopHitCachingAsync():
     _thread.start_new_thread(cacheTopHitResults,())
 
-runTopHitCachingAsync()
+#runTopHitCachingAsync()
 
 #cacheTopHitResults()
 
 if __name__ == '__main__':
-    application.run(debug=True)
+    application.run(host="0.0.0.0")
