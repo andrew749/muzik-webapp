@@ -35,7 +35,6 @@ $(document).ready(function(){
 function handleSearch(e){
     $("#content").empty();
     $("#content").height(0);
-    $(".page").next().remove();
     var searchString=$("#searchtext").val();
     getSongs(searchString);
 
@@ -43,14 +42,12 @@ function handleSearch(e){
 function handleSearchClick(e){
     $("#content").empty();
     $("#content").height(0);
-    $(".page").next().remove();
     $('#searchtext').val(e);
     getSongs(e);
 }
 
 function goBack(){
     $("#content").empty();
-    $(".page").next().remove();
     $('#content').append(contentMain).masonry();
     $("#backbutton").addClass("deactivatedarrow")
 }
