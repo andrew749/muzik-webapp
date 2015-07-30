@@ -18,6 +18,6 @@ ENV RDS_USERNAME=muzik_admin
 ENV RDS_PASSWORD=muzik-password
 ENV RDS_DB_NAME=Muzik
 
-EXPOSE 5000
+EXPOSE 80
 
 CMD python3 /srv/app.py
