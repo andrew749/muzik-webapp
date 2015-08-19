@@ -8,10 +8,7 @@ from Song import *
 from urllib.parse import quote
 import pdb
 from urllib.request import urlopen,Request
-import mp3skull
-import DownloadNL
-import YouTube
-import mp3raid
+from plugins import *
 import time
 import _thread
 import dbmanager

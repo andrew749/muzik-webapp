@@ -20,6 +20,17 @@ artist:"song artist",
 verified:"whether or not the song has a verified link"
 }
 ```
+<h3>Setup the environment</h3>
+This application is dockerized so all you need to do is build a docker image
+and run it.
+<h4>Build the image</h4>
+```
+docker build -t muzik .
+```
+<h4>Run the container</h4>
+```
+docker run -it -p 80:80 muzik
+```
 <h3>Reporting Issues</h3>
 To report any api issues, email me at andrewcod749@gmail.com
  Live @ muzik-api.herokuapp.com and muzik.elasticbeanstalk.com
