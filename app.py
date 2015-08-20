@@ -8,11 +8,14 @@ from Song import *
 from urllib.parse import quote
 import pdb
 from urllib.request import urlopen,Request
-from plugins import *
 import time
 import _thread
 import dbmanager
-
+import sys
+sys.path.append("plugins")
+from plugins import mp3skull
+from plugins import mp3raid
+from plugins import DownloadNL
 header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0',}
 
 
@@ -125,4 +128,5 @@ def runTopHitCachingAsync():
 #cacheTopHitResults()
 
 if __name__ == '__main__':
-    application.run(host="0.0.0.0",port=80)
+    #application.run(host="0.0.0.0",port=80)
+    application.run(debug=True)

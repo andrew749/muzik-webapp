@@ -1,6 +1,8 @@
 hits
 bin
 lib
+include
+.Python
 muzik.db
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

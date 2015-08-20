@@ -1,13 +1,4 @@
-from flask import Flask, url_for, request, render_template
-import requests
-from lxml import html
-import lxml
-import json
-from lxml import etree
-from Song import *
-from urllib.parse import quote
-import pdb
-from urllib.request import urlopen,Request
+import imports
 header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0',}
 def searchMP3Skull(songName):
     url="http://mp3skull.com/mp3/"+ str(songName.replace(' ','_')+".html")
