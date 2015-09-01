@@ -3,18 +3,21 @@ header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) G
 def searchDownloadNL(songName):
     downloadsnllink="http://www.downloads.nl/results/mp3/1/";#add string of song to end
     url=downloadsnllink+str(quote(songName))
-    page=requests.get(url, headers=header)
-    tree=html.fromstring(page.text)
-    elements=tree.xpath("//a[@class='tl j-lnk']")
-    songArray=[]
-    for song in elements:
-        songLink=song.xpath("@href")
-        songText=song.xpath("b//text()")
-        name=""
-        for i in songText:
-            name+=i
-        #print(name, songLink)
-        s={name:"http://www.downloads.nl"+songLink[0]}
-        songArray.append(s)
+    songArray = []
+    try:
+        page=requests.get(url, headers=header)
+        tree=html.fromstring(page.text)
+        elements=tree.xpath("//a[@class='tl j-lnk']")
+        for song in elements:
+            songLink=song.xpath("@href")
+            songText=song.xpath("b//text()")
+            name=""
+            for i in songText:
+                name+=i
+            #print(name, songLink)
+            s={name:"http://www.downloads.nl"+songLink[0]}
+            songArray.append(s)
+    except:
+        pass
     return songArray
 
