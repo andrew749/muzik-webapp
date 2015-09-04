@@ -97,12 +97,14 @@ def search(name):
         s = json.dumps(Song(name,x.url,x.artist,x.albumArt,x.album).songToJson(),indent=4)
         return s
     links=getResults(name)
-    dbmanager.addSong(name,"Unknown Artist","")
-    for y in links:
-        for (k,v) in y.items():
-            dbmanager.addSongResult(name,k,v)
-    print ("done searching for ",name)
-    return json.dumps(Song(name,links,"Unknown Artist","","").songToJson(),indent=4)
+    if len(links)>0:
+        dbmanager.addSong(name,"Unknown Artist","")
+        for y in links:
+            for (k,v) in y.items():
+                dbmanager.addSongResult(name,k,v)
+        print ("done searching for ",name)
+        return json.dumps(Song(name,links,"Unknown Artist","","").songToJson(),indent=4)
+    return json.dumps({})
 
 
 @application.route('/callback')
@@ -128,4 +130,4 @@ def runTopHitCachingAsync():
 #cacheTopHitResults()
 
 if __name__ == '__main__':
-    application.run(host="0.0.0.0",port=80)
+    application.run(debug=True,host="0.0.0.0",port=8080)

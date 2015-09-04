@@ -19,5 +19,5 @@ def getMP3RaidSongs(songName):
             #print(songURL)
             songArray.append({songName:songURL})
     except:
-        pass
+        print ("mp3raid failed")
     return songArray

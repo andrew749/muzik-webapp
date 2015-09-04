@@ -2,7 +2,8 @@ import imports
 header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0',}
 def searchDownloadNL(songName):
     downloadsnllink="http://www.downloads.nl/results/mp3/1/";#add string of song to end
-    url=downloadsnllink+str(quote(songName))
+    end=songName.replace(" ","_")
+    url=(downloadsnllink+end)
     songArray = []
     try:
         page=requests.get(url, headers=header)
@@ -18,6 +19,6 @@ def searchDownloadNL(songName):
             s={name:"http://www.downloads.nl"+songLink[0]}
             songArray.append(s)
     except:
-        pass
+        print ("DownloadNL Failed")
     return songArray
 
