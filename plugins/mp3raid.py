@@ -1,4 +1,4 @@
-import  imports
+from  imports import *
 url="http://www.mp3raid.ca/download/"
 header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0',}
 def getMP3RaidSongs(songName):
