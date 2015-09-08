@@ -13,6 +13,7 @@ import _thread
 import dbmanager
 import sys
 sys.path.append("plugins")
+from plugins import imports
 from plugins import mp3skull
 from plugins import mp3raid
 from plugins import DownloadNL
