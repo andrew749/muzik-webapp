@@ -74,6 +74,7 @@ def searchForSongs():
 
 def getResults(name):
     links=[]
+    print ("searching for Song: ", name)
     links_mp3skull=mp3skull.searchMP3Skull(name)
     links_downloadnl=DownloadNL.searchDownloadNL(name)
     links_mp3raid=mp3raid.getMP3RaidSongs(name)
@@ -125,10 +126,6 @@ def cacheTopHitResults():
 
 def runTopHitCachingAsync():
     _thread.start_new_thread(cacheTopHitResults,())
-
-#runTopHitCachingAsync()
-
-#cacheTopHitResults()
 
 if __name__ == '__main__':
     application.run(debug=True,host="0.0.0.0", port= 80)
