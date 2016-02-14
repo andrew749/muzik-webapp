@@ -1,10 +1,10 @@
-from plugins import imports
+from imports import *
 header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0',}
 def searchMP3Skull(songName):
     url="http://mp3skull.com/mp3/"+ str(songName.replace(' ','_')+".html")
     songArray = []
     try:
-        page=requests.get(url,headers=header)
+        page=requests.get(url,headers=header,timeout=3)
         tree=html.fromstring(page.text)
         songs=tree.xpath("//div[@id='song_html']//a[text()='Download']/@href")
         names=tree.xpath("//div[@id='song_html']//div/div/b/text()")
@@ -14,6 +14,7 @@ def searchMP3Skull(songName):
                 break
             songArray.append({names[x]:songs[x]})
             i+=1
-    except:
+    except Exception as e:
         print ("mp3skull failed.")
+        print (e)
     return (songArray)

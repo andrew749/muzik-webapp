@@ -19,7 +19,6 @@ from plugins import mp3raid
 from plugins import DownloadNL
 header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0',}
 
-
 application=Flask(__name__)
 
 """
@@ -74,7 +73,7 @@ def searchForSongs():
 
 def getResults(name):
     links=[]
-    print ("searching for Song: ", name)
+    print ("Searching for Song: ", name)
     links_mp3skull=mp3skull.searchMP3Skull(name)
     links_downloadnl=DownloadNL.searchDownloadNL(name)
     links_mp3raid=mp3raid.getMP3RaidSongs(name)
@@ -94,12 +93,12 @@ def search(name):
     #escape character incase of bad stuff
     name.replace("'","\'");
     x = dbmanager.getSongEntries(name)
-    if(x is not None):
+    if(x is not None and len(x.url) > 0):
         print("getting cached results Database")
         s = json.dumps(Song(name,x.url,x.artist,x.albumArt,x.album).songToJson(),indent=4)
         return s
-    links=getResults(name)
-    if len(links)>0:
+    links = getResults(name)
+    if len(links) > 0:
         dbmanager.addSong(name,"Unknown Artist","")
         for y in links:
             for (k,v) in y.items():
@@ -115,7 +114,7 @@ def handleCallback():
 
 def cacheTopHitResults():
     topHits = getTopHits()
-    i=0
+    i = 0
     for x in topHits:
         print("Searching for ",x.title.encode('utf-8'))
         search(x.title+" "+x.artist)
@@ -127,5 +126,8 @@ def cacheTopHitResults():
 def runTopHitCachingAsync():
     _thread.start_new_thread(cacheTopHitResults,())
 
+search("roxanne")
+
 if __name__ == '__main__':
-    application.run(debug=True,host="0.0.0.0", port= 80)
+    # application.run(debug=True,host="0.0.0.0", port=80)
+    application.run(debug=True, port=8080)
