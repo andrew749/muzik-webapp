@@ -9,7 +9,7 @@ RUN pip3 install  lxml
 RUN pip3 install  pymysql
 RUN pip3 install  python-dateutil
 
-ADD . /var/app
+ADD . /
 
 ENV RDS_HOSTNAME=muzik.ccychmdd3oxe.us-east-1.rds.amazonaws.com
 ENV RDS_PORT=3306
@@ -19,4 +19,4 @@ ENV RDS_DB_NAME=Muzik
 
 EXPOSE 80
 
-CMD python3 /var/app/app.py
+CMD python3 app.py
